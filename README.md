@@ -1,0 +1,1 @@
+`docker run --rm -d -v $(pwd):/tmp -w /tmp netresearch/sphinx-buildbox sh -c "make html"`
