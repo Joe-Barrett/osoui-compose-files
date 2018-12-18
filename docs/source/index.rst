@@ -17,10 +17,39 @@ This includes caveats and how to use them.
    webjive
 
 
+Usage
+=====
+Prerequsities
+-------------
 
-Indices and tables
-==================
+Before using, the TangoGQL and WebJive repositories should be cloned and their
+paths added to the `.env` file.
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+ - https://github.com/Joe-Barrett/tangogql
+ - https://github.com/Joe-Barrett/webjive
+
+Docker Compose should be installed on your system and the Docker daemon should
+be running.
+
+To Run
+    Replace <service stack> with the stack name you want to run.
+
+    `docker-compose -f <service stack>.yml up -d`
+
+To Stop
+    This command stops the services. The optional `--rmi` flag removes all 
+    images relating to that service stack. All removes all images, local 
+    removes only the images which were built locally.
+
+    `docker-compose -f <service stack>.yml down [--rmi all|local]`
+
+Logs
+    This command displays the logs of a container for any chosen service stack.
+    The services can be found in the individual pages of each stack.
+
+    `docker-compose -f <service stack>.yml logs <service name>`
+
+Status
+    This command displays the status of all containers in the stack.
+
+    `docker-compose -f <service stack>.yml ps`
