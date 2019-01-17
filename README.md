@@ -10,6 +10,18 @@ The files in this repository are made to be as environmentally independent as po
 docker-compose -f <service stack>.yml up -d
 ```
 
+### Stacks
+This table describes which services come with which service stack.
+
+| File                   |   Tango Database   |      TangoGQL      |    Test Device     |       Webjive       |
+| ---------------------- | :----------------: | :----------------: | :----------------: | :-----------------: |
+| tangogql               | :heavy_check_mark: | :heavy_check_mark: |        :x:         |         :x:         |
+| tangogql.testdevice    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |         :x:         |
+| webjive                | :heavy_check_mark: | :heavy_check_mark: |        :x:         | :heavy_check_mark:  |
+| webjive.dev            | :heavy_check_mark: | :heavy_check_mark: |        :x:         | :heavy_check_mark:* |
+| webjive.dev.testdevice | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:* |
+\* Dev mode uses `npm start` rather than serving the app using nginx.  
+
 More complete usage can be found by building the docs.
 
 ## Docs
