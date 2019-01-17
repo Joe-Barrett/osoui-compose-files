@@ -1,0 +1,76 @@
+version: "2"
+volumes:
+  tangodb: {}
+
+services:
+  tangodb:
+    image: registry.gitlab.com/ska-telescope/ska-docker/tango-db:latest
+    container_name: tangodb
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=tango
+      - MYSQL_USER=tango
+      - MYSQL_PASSWORD=tango
+    volumes:
+      - tangodb:/var/lib/mysql
+
+  databaseds:
+    image: registry.gitlab.com/ska-telescope/ska-docker/tango-cpp:latest
+    container_name: databaseds
+    hostname: databaseds
+    depends_on:
+      - tangodb
+    environment:
+      - MYSQL_HOST=tangodb:3306
+      - MYSQL_DATABASE=tango
+      - MYSQL_USER=tango
+      - MYSQL_PASSWORD=tango
+      - TANGO_HOST=databaseds:10000
+    entrypoint:
+      - /usr/local/bin/wait-for-it.sh
+      - tangodb:3306
+      - --timeout=30
+      - --strict
+      - --
+      - /usr/local/bin/DataBaseds
+      - "2"
+      - -ORBendPoint
+      - giop:tcp::10000
+
+  tangotest:
+    image: registry.gitlab.com/ska-telescope/ska-docker/tango-java:latest
+    container_name: tangotest
+    depends_on:
+      - databaseds
+    environment:
+      - TANGO_HOST=databaseds:10000
+    entrypoint:
+      - /usr/local/bin/wait-for-it.sh
+      - databaseds:10000
+      - --timeout=30
+      - --strict
+      - --
+      - /usr/local/bin/TangoTest
+      - test
+
+  tangogql:
+    build: ${TANGOGQL_REPO_PATH}
+    container_name: tangogql
+    restart: always
+    command: /bin/bash -c "source activate graphql && adev runserver tangogql/aioserver.py --app-factory=dev_run --port=5004"
+    ports:
+      - "5004:5004"
+    volumes:
+      - ${TANGOGQL_REPO_PATH}:/python3-taurus-core/web-maxiv-graphql
+      - ${TANGOGQL_REPO_PATH}/logs:/var/log/tangogql
+    environment:
+      - TANGO_HOST=databaseds:10000
+      - LOG_PATH=/var/log/tangogql
+      # If this is not set, the output of python is delayed and only shows when the docker container restarts
+      - PYTHONUNBUFFERED=1
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
