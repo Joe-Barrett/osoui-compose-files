@@ -39,7 +39,7 @@ Navigate to the docs directory
 ``` bash
 cd docs
 ```
-Run the make command, reccomended is HTML
+Run the make command, recommended is HTML
 ``` bash
 make html
 ```
