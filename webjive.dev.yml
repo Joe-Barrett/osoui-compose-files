@@ -4,7 +4,7 @@ volumes:
 
 services:
   tangodb:
-    image: registry.gitlab.com/ska-telescope/ska-docker/tango-db:latest
+    image: ${SKA_DOCKER_REGISTRY}/tango-db:latest
     container_name: tangodb
     environment:
       - MYSQL_ROOT_PASSWORD=secret
@@ -15,7 +15,7 @@ services:
       - tangodb:/var/lib/mysql
 
   databaseds:
-    image: registry.gitlab.com/ska-telescope/ska-docker/tango-cpp:latest
+    image: ${SKA_DOCKER_REGISTRY}/tango-cpp:latest
     container_name: databaseds
     hostname: databaseds
     depends_on:
