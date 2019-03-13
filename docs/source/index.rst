@@ -3,10 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-OSO-UI Compose Files
-====================
-The following documentation outlines Docker Compose files which are useful to 
-the SKA OSO-UI team during development.
+SKA Engineering UI Compose Utilities
+====================================
+The following documentation outlines Docker Compose files which are useful to the SKA OSO-UI team during development.
 This includes caveats and how to use them.
 
 .. toctree::
@@ -25,8 +24,8 @@ Prerequsities
 Before using, the TangoGQL and WebJive repositories should be cloned and their
 paths added to the `.env` file.
 
- - https://github.com/Joe-Barrett/tangogql
- - https://github.com/Joe-Barrett/webjive
+ - https://github.com/ska-telescope/tangogql
+ - https://github.com/ska-telescope/webjive
 
 Docker Compose should be installed on your system and the Docker daemon should
 be running.
