@@ -1,6 +1,6 @@
-# OSO-UI Compose Files :whale:
-This repository hosts Docker Compose files which may be useful to the SKA OSO-UI
-team during development. 
+# SKA Engineering UI Compose Utilities :whale:
+This repository hosts Docker Compose files which may be useful to developers working on the SKA Engineering UI tool. 
+At the moment this is primarily the SKA-OSO-UI team. 
 
 ## Contributing
 The files in this repository are made to be as environmentally independent as possible. **Please** ensure you do not check in any code which includes filepaths, this applies mostly to the `.env` file. Thanks :thumbsup:
