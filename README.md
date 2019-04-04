@@ -26,6 +26,8 @@ The team provide a reference release of the current webjive system in the form o
 
 These represent a relatively stable, but not necessarily functionally complete version of the webjive and TangGQL components.
 
+|Component            |Image name                 |
+| --------------------| :-----------------------: |
 |Authentication server|webjive-develop_auth       |
 |TangoGQL             |webjive-develop_tangogql   |
 |Dashboard repository |webjive-develop_dashboards | 
