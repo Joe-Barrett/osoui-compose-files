@@ -24,7 +24,7 @@ This table describes which services come with which service stack.
 ### Integration image
 The team provide a reference release of the current webjive system in the form of a set of docker images stored on the SKA docker hub
 
-These represent a relatively stable, but not necessarily functionally complete version of the webjive and TangGQL components.
+These represent a relatively stable, but not necessarily functionally complete version of the webjive and TangoGQL components.
 
 |Component            |Image name                 |
 | --------------------| :-----------------------: |
