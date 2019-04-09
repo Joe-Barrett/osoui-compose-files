@@ -1,59 +1,30 @@
-version: "2"
+version: "2.2"
+
 volumes:
-  tangodb: {}
+  tangogql-logs: {}
 
 services:
-  tangodb:
-    image: ${SKA_DOCKER_REGISTRY}/tango-db:latest
-    container_name: tangodb
-    environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=tango
-      - MYSQL_USER=tango
-      - MYSQL_PASSWORD=tango
-    volumes:
-      - tangodb:/var/lib/mysql
-
-  databaseds:
-    image: ${SKA_DOCKER_REGISTRY}/tango-cpp:latest
-    container_name: databaseds
-    hostname: databaseds
-    depends_on:
-      - tangodb
-    environment:
-      - MYSQL_HOST=tangodb:3306
-      - MYSQL_DATABASE=tango
-      - MYSQL_USER=tango
-      - MYSQL_PASSWORD=tango
-      - TANGO_HOST=databaseds:10000
-    entrypoint:
-      - /usr/local/bin/wait-for-it.sh
-      - tangodb:3306
-      - --timeout=30
-      - --strict
-      - --
-      - /usr/local/bin/DataBaseds
-      - "2"
-      - -ORBendPoint
-      - giop:tcp::10000
-
   tangogql:
-    build: ${TANGOGQL_REPO_PATH}
-    container_name: tangogql
-    restart: always
+    image: ${DOCKER_REGISTRY_HOST}/${DOCKER_REGISTRY_USER}/webjive-develop_tangogql:latest
+    container_name: ${CONTAINER_NAME_PREFIX}tangogql
+    network_mode: ${NETWORK_MODE}
     command: /bin/bash -c "source activate graphql && adev runserver tangogql/aioserver.py --app-factory=dev_run --port=5004"
-    ports:
-      - "5004:5004"
+    depends_on:
+      - databaseds
+      - redis
     volumes:
-      - ${TANGOGQL_REPO_PATH}:/python3-taurus-core/web-maxiv-graphql
-      - ${TANGOGQL_REPO_PATH}/logs:/var/log/tangogql
+      - tangogql-logs:/var/log/tangogql
     environment:
-      - TANGO_HOST=databaseds:10000
+      - TANGO_HOST=${TANGO_HOST}
       - LOG_PATH=/var/log/tangogql
       # If this is not set, the output of python is delayed and only shows when the docker container restarts
       - PYTHONUNBUFFERED=1
+    labels:
+      - "traefik.frontend.rule=Host:localhost; PathPrefix: /testdb/db, /testdb/socket, /testdb/graphiql; ReplacePathRegex: ^/testdb/((?:db|socket|graphiql.*?)/?)/?$$ /$$1"
+      - "traefik.port=5004"
+
   redis:
     image: redis
     container_name: redis
-    ports:
-      - "6379:6379"
+    network_mode: ${NETWORK_MODE}
+
