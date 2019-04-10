@@ -1,0 +1,102 @@
+version: "2.2"
+
+services:
+  dishmaster:
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    container_name: ${CONTAINER_NAME_PREFIX}dishmaster
+    network_mode: ${NETWORK_MODE}
+    init: true
+    depends_on:
+      - databaseds
+      - rsyslog-tmc
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             tango_admin --add-server DishMaster/test DishMaster mid_d0001/elt/master &&\
+             sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
+             /venv/bin/python /app/tmcprototype/DishMaster/DishMaster/DishMaster.py test"
+    volumes_from:
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
+
+  dishleafnode:
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    container_name: ${CONTAINER_NAME_PREFIX}dishleafnode
+    network_mode: ${NETWORK_MODE}
+    init: true
+    depends_on:
+      - dishmaster
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    command: >
+      /bin/bash -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             tango_admin --add-server DishLeafNode/test DishLeafNode ska_mid/tm_leaf_node/d0001 &&\
+             tango_admin --add-property ska_mid/tm_leaf_node/d0001 DishMasterFQDN mid_d0001/elt/master &&\
+             tango_admin --ping-device mid_d0001/elt/master 10 &&\
+             sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
+             /venv/bin/python /app/tmcprototype/DishLeafNode/DishLeafNode/DishLeafNode.py test"
+    volumes_from:
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
+
+  subarraynode1:
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    container_name: ${CONTAINER_NAME_PREFIX}subarraynode1
+    network_mode: ${NETWORK_MODE}
+    init: true
+    depends_on:
+      - dishleafnode
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             tango_admin --add-server SubarrayNode/test1 SubarrayNode ska_mid/tm_subarray_node/1 &&\
+             tango_admin --add-property ska_mid/tm_subarray_node/1 DishLeafNodePrefix ska_mid/tm_leaf_node/d &&\
+             tango_admin --ping-device ska_mid/tm_leaf_node/d0001 10 &&\
+             sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
+             /venv/bin/python /app/tmcprototype/SubarrayNode/SubarrayNode/SubarrayNode.py test1"
+    volumes_from:
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
+
+  subarraynode2:
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    container_name: ${CONTAINER_NAME_PREFIX}subarraynode2
+    network_mode: ${NETWORK_MODE}
+    init: true
+    depends_on:
+      - dishleafnode
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             tango_admin --add-server SubarrayNode/test2 SubarrayNode ska_mid/tm_subarray_node/2 &&\
+             tango_admin --add-property ska_mid/tm_subarray_node/2 DishLeafNodePrefix ska_mid/tm_leaf_node/d &&\
+             tango_admin --ping-device ska_mid/tm_leaf_node/d0001 10 &&\
+             sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
+             /venv/bin/python /app/tmcprototype/SubarrayNode/SubarrayNode/SubarrayNode.py test2"
+    volumes_from:
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
+
+  centralnode:
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    container_name: ${CONTAINER_NAME_PREFIX}centralnode
+    network_mode: ${NETWORK_MODE}
+    init: true
+    depends_on:
+      - subarraynode1
+      - subarraynode2
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             tango_admin --add-server CentralNode/test CentralNode ska_mid/tm_central/central_node &&\
+             tango_admin --ping-device ska_mid/tm_subarray_node/1 10 &&\
+             sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
+             /venv/bin/python /app/tmcprototype/CentralNode/CentralNode/CentralNode.py test"
+    volumes_from:
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
+
+  rsyslog-tmc:
+    container_name: ${CONTAINER_NAME_PREFIX}rsyslog-tmc
+    network_mode: ${NETWORK_MODE}
+    image: jumanjiman/rsyslog
+
