@@ -59,3 +59,11 @@ Running services can be stopped individually or as a whole using the
    # stop all services and tear down the system
    make down
 
+After starting the WebJive containers and any required additional containers, navigate to
+`http://localhost:22484/testdb` to access WebJive. The following credentials can be used:
+
+Username
+    user1
+
+Password
+    abc123
