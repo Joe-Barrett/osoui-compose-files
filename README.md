@@ -32,6 +32,8 @@ After starting the WebJive containers and any required additional containers, na
   <dd>abc123</dd>
 </dl>
 
+More complete usage can be found by building the docs.
+
 ## Docs
 ### Generate docs using Docker
 Ensure Docker is running and run the following command in the repository's root
