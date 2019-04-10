@@ -113,7 +113,7 @@ start: up ## start a service (usage: make start <servicename>)
 
 tmc: up ## start TMC devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
-		rsyslog-tmcprototype \
+		rsyslog-tmc \
 		dishmaster \
 		dishleafnode \
 		subarraynode1 \
@@ -122,9 +122,6 @@ tmc: up ## start TMC devices
 
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)
-
-attach:  ## attach a service to an existing Tango network
-	$(DOCKER_COMPOSE_ARGS) docker-compose $(ATTACH_COMPOSE_FILE_ARGS) up -d $(SERVICE)
 
 status:  ## show the container status
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) ps

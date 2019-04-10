@@ -8,7 +8,7 @@ services:
     init: true
     depends_on:
       - databaseds
-      - rsyslog-tmcprototype
+      - rsyslog-tmc
     environment:
       - TANGO_HOST=${TANGO_HOST}
     command: >
@@ -17,7 +17,7 @@ services:
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
              /venv/bin/python /app/tmcprototype/DishMaster/DishMaster/DishMaster.py test"
     volumes_from:
-      - ${CONTAINER_NAME_PREFIX}rsyslog-tmcprototype:rw
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
 
   dishleafnode:
     image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
@@ -36,7 +36,7 @@ services:
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
              /venv/bin/python /app/tmcprototype/DishLeafNode/DishLeafNode/DishLeafNode.py test"
     volumes_from:
-      - ${CONTAINER_NAME_PREFIX}rsyslog-tmcprototype:rw
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
 
   subarraynode1:
     image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
@@ -55,7 +55,7 @@ services:
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
              /venv/bin/python /app/tmcprototype/SubarrayNode/SubarrayNode/SubarrayNode.py test1"
     volumes_from:
-      - ${CONTAINER_NAME_PREFIX}rsyslog-tmcprototype:rw
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
 
   subarraynode2:
     image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
@@ -74,7 +74,7 @@ services:
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
              /venv/bin/python /app/tmcprototype/SubarrayNode/SubarrayNode/SubarrayNode.py test2"
     volumes_from:
-      - ${CONTAINER_NAME_PREFIX}rsyslog-tmcprototype:rw
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
 
   centralnode:
     image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
@@ -93,10 +93,10 @@ services:
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
              /venv/bin/python /app/tmcprototype/CentralNode/CentralNode/CentralNode.py test"
     volumes_from:
-      - ${CONTAINER_NAME_PREFIX}rsyslog-tmcprototype:rw
+      - ${CONTAINER_NAME_PREFIX}rsyslog-tmc:rw
 
-  rsyslog-tmcprototype:
-    container_name: ${CONTAINER_NAME_PREFIX}rsyslog-tmcprototype
+  rsyslog-tmc:
+    container_name: ${CONTAINER_NAME_PREFIX}rsyslog-tmc
     network_mode: ${NETWORK_MODE}
     image: jumanjiman/rsyslog
 

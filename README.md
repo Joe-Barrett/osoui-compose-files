@@ -33,7 +33,7 @@ After starting the WebJive containers and any required additional containers, na
 </dl>
 
 ## Docs
-### Using Docker
+### Generate docs using Docker
 Ensure Docker is running and run the following command in the repository's root
 directory
 ``` bash
