@@ -113,12 +113,23 @@ start: up ## start a service (usage: make start <servicename>)
 
 tmc: up ## start TMC devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
-		rsyslog-tmc \
-		dishmaster \
-		dishleafnode \
-		subarraynode1 \
-		subarraynode2 \
-		centralnode
+		rsyslog-tmcprototype \
+    tangodb \
+    databaseds \
+    configure-devices \
+    dishmaster4 \
+    dishmaster1 \
+    dishmaster2 \
+    dishmaster3 \
+    tm-alarmhandler \
+    dishleafnode3 \
+    dishleafnode1 \
+    dishleafnode4 \
+    configure-alarms \
+    dishleafnode2 \
+    subarraynode1 \
+    subarraynode2 \
+    centralnode
 
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)
