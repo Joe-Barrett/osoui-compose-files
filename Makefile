@@ -113,9 +113,7 @@ start: up ## start a service (usage: make start <servicename>)
 
 tmc: up ## start TMC devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
-		rsyslog-tmcprototype \
-    tangodb \
-    databaseds \
+		rsyslog-tmc \
     configure-devices \
     dishmaster4 \
     dishmaster1 \
