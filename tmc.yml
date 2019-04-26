@@ -12,7 +12,7 @@ services:
       - TANGO_HOST=${TANGO_HOST}
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
-             /venv/bin/python /app/tmcprototype/configure.py"
+             /venv/bin/python /app/tmcprototype/addDevicesAndProperties.py"
 
   dishmaster1:
     image: nexus.engageska-portugal.pt/tango-example/tmcprototype:latest
