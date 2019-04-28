@@ -57,3 +57,9 @@ make html
 Then open `docs/build/index.html` in your chosen browser.
 
 
+# Online demo
+
+https://integration.engageska-portugal.pt/testdb (log in with user1/abc123)
+
+
+
