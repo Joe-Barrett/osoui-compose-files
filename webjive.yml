@@ -1,5 +1,8 @@
 version: "2.2"
 
+volumes:
+  mongodb: {}
+
 services:
   webjive:
     image: nexus.engageska-portugal.pt/ska-docker/webjive-develop_webjive:latest
@@ -40,3 +43,5 @@ services:
     image: mongo:3.6-stretch
     container_name: ${CONTAINER_NAME_PREFIX}mongodb
     network_mode: ${NETWORK_MODE}
+    volumes:
+      - mongodb:/data/db
