@@ -114,7 +114,9 @@ start: up ## start a service (usage: make start <servicename>)
 tmc: up ## start TMC devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
 		rsyslog-tmc \
-    configure-devices \
+    add-devs-and-props \
+    configure-alarms \
+    conf-polling-events \
     dishmaster4 \
     dishmaster1 \
     dishmaster2 \
@@ -123,7 +125,6 @@ tmc: up ## start TMC devices
     dishleafnode3 \
     dishleafnode1 \
     dishleafnode4 \
-    configure-alarms \
     dishleafnode2 \
     subarraynode1 \
     subarraynode2 \

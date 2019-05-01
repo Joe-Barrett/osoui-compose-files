@@ -1,12 +1,12 @@
 version: '2.2'
 
 services:
-  configure-devices:
+  add-devs-and-props:
     image: nexus.engageska-portugal.pt/tango-example/tmcprototype:latest
     depends_on:
       - databaseds
     network_mode: ${NETWORK_MODE}
-    container_name: ${CONTAINER_NAME_PREFIX}configure
+    container_name: ${CONTAINER_NAME_PREFIX}add-devs-and-props
     init: true
     environment:
       - TANGO_HOST=${TANGO_HOST}
@@ -19,7 +19,7 @@ services:
     depends_on:
       - databaseds
       - rsyslog-tmc
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishmaster1
     init: true
@@ -37,7 +37,7 @@ services:
     depends_on:
       - databaseds
       - rsyslog-tmc
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishmaster2
     init: true
@@ -55,7 +55,7 @@ services:
     depends_on:
       - databaseds
       - rsyslog-tmc
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishmaster3
     init: true
@@ -73,7 +73,7 @@ services:
     depends_on:
       - databaseds
       - rsyslog-tmc
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishmaster4
     init: true
@@ -92,7 +92,7 @@ services:
       - databaseds
       - rsyslog-tmc
       - dishmaster1
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishleafnode1
     init: true
@@ -112,7 +112,7 @@ services:
       - databaseds
       - rsyslog-tmc
       - dishmaster2
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishleafnode2
     init: true
@@ -132,7 +132,7 @@ services:
       - databaseds
       - rsyslog-tmc
       - dishmaster3
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishleafnode3
     init: true
@@ -152,7 +152,7 @@ services:
       - databaseds
       - rsyslog-tmc
       - dishmaster4
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}dishleafnode4
     init: true
@@ -175,12 +175,12 @@ services:
       - dishleafnode2
       - dishleafnode3
       - dishleafnode4
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}subarraynode1
     init: true
     environment:
-    - TANGO_HOST=${TANGO_HOST}
+      - TANGO_HOST=${TANGO_HOST}
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
@@ -194,7 +194,7 @@ services:
              tango_admin --ping-device ska_mid/tm_leaf_node/d0004 10 &&\
              /venv/bin/python /app/tmcprototype/SubarrayNode/SubarrayNode/SubarrayNode.py sa1"
     volumes_from:
-    - rsyslog-tmc:rw
+      - rsyslog-tmc:rw
 
   subarraynode2:
     image: nexus.engageska-portugal.pt/tango-example/tmcprototype:latest
@@ -205,12 +205,12 @@ services:
       - dishleafnode2
       - dishleafnode3
       - dishleafnode4
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}subarraynode2
     init: true
     environment:
-    - TANGO_HOST=${TANGO_HOST}
+      - TANGO_HOST=${TANGO_HOST}
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
@@ -224,7 +224,7 @@ services:
              tango_admin --ping-device ska_mid/tm_leaf_node/d0004 10 &&\
              /venv/bin/python /app/tmcprototype/SubarrayNode/SubarrayNode/SubarrayNode.py sa2"
     volumes_from:
-    - rsyslog-tmc:rw
+      - rsyslog-tmc:rw
 
   centralnode:
     image: nexus.engageska-portugal.pt/tango-example/tmcprototype:latest
@@ -233,11 +233,12 @@ services:
       - rsyslog-tmc
       - subarraynode1
       - subarraynode2
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}centralnode
+    init: true
     environment:
-    - TANGO_HOST=${TANGO_HOST}
+      - TANGO_HOST=${TANGO_HOST}
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
@@ -253,21 +254,45 @@ services:
              tango_admin --ping-device ska_mid/tm_subarray_node/2 10 &&\
              /venv/bin/python /app/tmcprototype/CentralNode/CentralNode/CentralNode.py 01"
     volumes_from:
-    - rsyslog-tmc:rw
+      - rsyslog-tmc:rw
 
   tm-alarmhandler:
     image: nexus.engageska-portugal.pt/tango-example/tmalarmhandler:latest
     depends_on:
       - databaseds
-      - configure-devices
+      - add-devs-and-props
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}tmalarmhandler
     init: true
     environment:
-    - TANGO_HOST=${TANGO_HOST}
+      - TANGO_HOST=${TANGO_HOST}
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
              ./app/alarmhandler-srv 01"
+
+  conf-polling-events:
+    image: nexus.engageska-portugal.pt/tango-example/tmcprototype:latest
+    depends_on:
+      - databaseds
+      - dishmaster1
+      - dishmaster2
+      - dishmaster3
+      - dishmaster4
+      - dishleafnode1
+      - dishleafnode2
+      - dishleafnode3
+      - dishleafnode4
+      - subarraynode1
+      - subarraynode2
+      - centralnode
+    network_mode: ${NETWORK_MODE}
+    container_name: ${CONTAINER_NAME_PREFIX}conf-polling-events
+    init: true
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             /venv/bin/python /app/tmcprototype/configurePollingAndEvents.py"
 
   configure-alarms:
     image: nexus.engageska-portugal.pt/tango-example/tmcprototype:latest
@@ -277,11 +302,12 @@ services:
       - dishmaster2
       - dishmaster3
       - dishmaster4
+      - conf-polling-events
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}configure-alarms
     init: true
     environment:
-    - TANGO_HOST=${TANGO_HOST}
+      - TANGO_HOST=${TANGO_HOST}
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
              /venv/bin/python /app/tmcprototype/TMAlarmHandler/configure_alarms.py"
