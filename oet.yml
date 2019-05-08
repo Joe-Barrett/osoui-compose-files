@@ -1,0 +1,31 @@
+#
+# Docker compose file that launches an interactive iTango session.
+#
+# Connect to the interactive session with 'docker attach itango'.
+# Disconnect with the Docker deattach sequence: <CTRL>+<P> <CTRL>+<Q>
+#
+# Defines:
+#   - itango: iTango interactive session
+#
+# Requires: 
+#   - tango.yml
+#
+version: '2.2'
+
+services:
+  itango:
+    image: nexus.engageska-portugal.pt/ska-telescope/oet:latest
+    container_name: ${CONTAINER_NAME_PREFIX}oet
+    network_mode: ${NETWORK_MODE}
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    stdin_open: true
+    tty: true
+    init: True
+    entrypoint:
+      - /usr/local/bin/wait-for-it.sh
+      - ${TANGO_HOST}
+      - --timeout=30
+      - --strict
+      - --
+      - /venv/bin/itango3

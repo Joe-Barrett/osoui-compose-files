@@ -108,6 +108,9 @@ endif
 webjive: minimal ## start WebJive
 	$(DOCKER_COMPOSE_ARGS) docker-compose -f tango.yml $(WEBJIVE_COMPOSE_FILE_ARGS) up -d
 
+oet: minimal  ## start the OET
+	$(DOCKER_COMPOSE_ARGS) docker-compose -f tango.yml -f oet.yml up -d
+
 start: up ## start a service (usage: make start <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start $(SERVICE)
 
