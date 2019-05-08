@@ -1,4 +1,7 @@
 # SKA Engineering UI Compose Utilities :whale:
+
+[![Documentation Status](https://readthedocs.org/projects/ska-engineering-ui-compose-utils/badge/?version=latest)](https://developer.skatelescope.org/projects/ska-engineering-ui-compose-utils/en/latest/?badge=latest)
+
 This repository hosts Docker Compose files which may be useful to developers working on the SKA Engineering UI tool. 
 At the moment this is primarily the SKA-OSO-UI team. 
 
