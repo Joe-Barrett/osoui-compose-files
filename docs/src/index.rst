@@ -18,10 +18,19 @@ instantiated on a developer's laptop or workstation.
 
    services
    usage
+   contribution
 
 
 Prerequsities
 -------------
 
 To use this project, Docker >= v18 and GNU Make must be installed.
+
+Development of the OSO-UI applications
+--------------------------------------
+
+The development of the OSO-UI webjive application suite is a collaberation between
+software developers at the Max IV  Laboratory in Lund  and the SKA OSO-UI team.
+
+Any development work on the webjive suite follows an agreed :doc:`.\contribution`
 

@@ -24,6 +24,7 @@ import sphinx_rtd_theme
 
 def setup(app):
     app.add_stylesheet('css/custom.css')
+    app.add_stylesheet('css/themes_override.css'),  # override wide tables in RTD theme
 
 # -- General configuration ------------------------------------------------
 
