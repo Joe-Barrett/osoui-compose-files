@@ -93,6 +93,9 @@ pull: ## pull the images from the Docker hub
 up: webjive  ## start Tango and WebJive, preparing all other services
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up --no-start
 
+debug:  ## start and debug all devices
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up
+
 down:  ## stop all services and tear down the system
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) down
 ifneq ($(NETWORK_MODE),host)
