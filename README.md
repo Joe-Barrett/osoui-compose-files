@@ -57,12 +57,12 @@ Run the make command, recommended is HTML
 make html
 ```
 
-Then open `docs/build/index.html` in your chosen browser.
+Then open `docs/build/html/index.html` in your chosen browser.
 
 
 # Online demo
 
-https://integration.engageska-portugal.pt/testdb (log in with user1/abc123)
+http://integration.engageska-portugal.pt/testdb (log in with user1/abc123)
 
 
 
