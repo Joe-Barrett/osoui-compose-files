@@ -16,6 +16,7 @@ instantiated on a developer's laptop or workstation.
    :maxdepth: 2
    :caption: Contents:
 
+   overview
    services
    usage
    contribution
