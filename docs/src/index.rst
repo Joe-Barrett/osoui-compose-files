@@ -12,6 +12,8 @@ defines a set of docker-compose configurations for OSO-UI applications
 and their dependencies so that a test integrated system can be
 instantiated on a developer's laptop or workstation.
 
+WebJive General documentation is available in the following link: https://webjive.readthedocs.io/en/latest/index.html
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
