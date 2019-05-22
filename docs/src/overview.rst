@@ -99,6 +99,7 @@ It is assumed that the following are installed and working correctly before atte
 
 * Git
 
+* Docker 3.0
 
 Steps
 ~~~~~
@@ -227,21 +228,21 @@ For the purposes of this example the Tango device ‘sys/tg_test/1’ belonging 
 Webjive Session Persistence
 ===========================
 
-A key feature of Webjive is the ability to save a session layout which a User has created, so that it can be reused or edited in the future.  The Webjive session layout is saved as a JSON (JavaScript Object Notation) file.  It is important to note that exchanged data is not retained in this file, but rather the session configuration and layout.
+A key feature of Webjive is the ability to save a session layout which a User has created, so that it can be reused or edited in the future.  It is important to note that exchanged data is not retained in this file, but rather the session configuration and layout.
 
 
-Saving the Webjive session\ [#F3]_\ 
-------------------------------------
+Saving the Webjive session 
+---------------------------
 
-Once a Webjive session layout has been created and appropriate links between widgets and Tango devices, it can be saved by clicking on the ‘Save Layout’ button at the top of the canvas.  This will open a modal window and present a default file name for the layout, which may be changed if desired. Clicking on save will save this file to your local downloads directory.
+Once a Webjive session layout has been created and appropriate links between widgets and Tango devices, it can be saved by giving the dashboard a new. A fresh dashboard automatically is named ‘Untitled dashboard’.  The user can simply click and delete this name and replace it with an appropriate dashboard name of choice.
 
 
-Loading the Webjive session\ [#F4]_\ 
--------------------------------------
+Loading the Webjive session
+---------------------------
 
-To open a saved Webjive layout click on the ‘Load Layout’ button at the top of the canvas. This opens a file browser window in which you can locate the JSON file that is to be loaded. Once the file is selected, click on ‘Open’.  After a short wait the file will have loaded and the desired layout will be presented on the canvas.  This Webjive layout session can then be started by following the process described in the Starting the Webjive Session. Alternatively it is possible to modify the layout before starting the session, but it will be necessary to save any new changes.
+To open a saved Webjive layout locate and click on the ‘Dashboards’ button (next to the Library button) at the top of the widget drag and drop menu. This will present the user with all available Dashboards. Locate the Dashboard the user wishes to open and click on it. After a short pause the dashboard will have loaded and its widgets displayed on the canvas.
 
-Note that it is not possible to load a non Webjive layout JSON file into Webjive.
+It should be noted that editing the canvas of a dashboard will automatically modify that dashboard and will be saved as such.
 
 
 Online Demo
@@ -253,6 +254,5 @@ It is possible to tryout Webjive before installing a local version.  However thi
 
 .. [#f1]  Guidance created using Readme of the ska-engineering-ui-compose-utils and notes from ticket AT2-139. Link is  `https://github.com/ska-telescope/ska-engineering-ui-compose-utils <https://github.com/ska-telescope/ska-engineering-ui-compose-utils>`__ 
 .. [#f2]  Currently SKA Webjive uses the generic username and password credentials
-.. [#f3]  Description based upon material presented in completing Jira ticket AT2-56  `https://jira.skatelescope.org/browse/AT2-56?jql=text%20~%20%22JSON%22 <https://jira.skatelescope.org/browse/AT2-56?jql=text%20~%20%22JSON%22>`__ 
-.. [#f4]   Description based upon material presented in completing Jira ticket AT2-57  `https://jira.skatelescope.org/browse/AT2-57?jql=text%20~%20%22JSON%22 <https://jira.skatelescope.org/browse/AT2-57?jql=text%20~%20%22JSON%22>`__ 
+
 
