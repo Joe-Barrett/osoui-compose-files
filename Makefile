@@ -127,6 +127,9 @@ tmc: up ## start TMC devices
     dishmaster1 \
     dishmaster2 \
     dishmaster3 \
+    cbftestmaster \
+    cspmaster \
+    cspmasterleafnode \
     tm-alarmhandler \
     dishleafnode3 \
     dishleafnode1 \
