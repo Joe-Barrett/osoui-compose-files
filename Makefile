@@ -119,25 +119,38 @@ start: up ## start a service (usage: make start <servicename>)
 
 tmc: up ## start TMC devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
-		rsyslog-tmc \
-    add-devs-and-props \
-    configure-alarms \
-    conf-polling-events \
-    dishmaster4 \
-    dishmaster1 \
-    dishmaster2 \
-    dishmaster3 \
-    cbftestmaster \
-    cspmaster \
-    cspmasterleafnode \
-    tm-alarmhandler \
-    dishleafnode3 \
-    dishleafnode1 \
-    dishleafnode4 \
-    dishleafnode2 \
-    subarraynode1 \
-    subarraynode2 \
-    centralnode
+		sdp-dsconfig \
+		tmc-dsconfig \
+		csp-dsconfig \
+		sdpmaster \
+		sdpsubarray \
+		cspmaster \
+		cspsubarray \
+		cbfmaster \
+		cbfsubarray01 \
+		vcc001 \
+		vcc002 \
+		vcc003 \
+		vcc004 \
+		fsp01 \
+		tmclogger \
+		dishmaster1  \
+		dishmaster2 \
+		dishmaster3 \
+		dishmaster4 \
+		dishleafnode1 \
+		dishleafnode2 \
+		dishleafnode3 \
+		dishleafnode4 \
+		cspsubarrayleafnode \
+		cspmasterleafnode \
+		sdpsubarrayleafnode \
+		sdpmasterleafnode \
+		subarraynode1 \
+		subarraynode2 \
+		centralnode \
+		rsyslog-tmcprototype \
+		tm-alarmhandler
 
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)
