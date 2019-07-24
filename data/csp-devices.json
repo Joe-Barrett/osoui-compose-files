@@ -65,13 +65,22 @@
                         },
                         "properties": {
                             "CspSubarrays": [
-                                "mid_csp/elt/subarray_01"
+                                "mid_csp/elt/subarray01"
                             ],
                             "MaxCapabilities": [
                                 "Subarray:16",
                                 "VlbiBeam:20",
                                 "TimingBeam:16",
                                 "SearchBeam:1500"
+                            ],
+                            "CspMidCbf": [
+                                "mid_csp_cbf/sub_elt/master"
+                            ],
+                            "CspMidPss": [
+                                "mid_csp_pss/sub_elt/master"
+                            ],
+                            "CspMifPst": [
+                                "mid_csp_pst/sub_elt/master"
                             ],
                             "polled_attr": [
                                 "healthstate",
@@ -177,7 +186,7 @@
                             },
                             "receptors": {
                                 "__root_att": [
-                                    "mid_csp_cbf/sub_elt/subarray01/receptors"
+                                    "mid_csp_cbf/sub_elt/subarray_01/receptors"
                                 ]
                             },
                             "obsMode": {
@@ -188,12 +197,12 @@
                             },
                             "vccHealthState": {
                                 "__root_att": [
-                                    "mid_csp_cbf/sub_elt/subarray01/vccHealthState"
+                                    "mid_csp_cbf/sub_elt/subarray_01/vccHealthState"
                                 ]
                             },
                             "vccState": {
                                 "__root_att": [
-                                    "mid_csp_cbf/sub_elt/subarray01/vccState"
+                                    "mid_csp_cbf/sub_elt/subarray_01/vccState"
                                 ]
                             },
                             "storageLoggingLevel": {
