@@ -189,6 +189,11 @@
                                     "mid_csp_cbf/sub_elt/subarray_01/receptors"
                                 ]
                             },
+                            "cbfOutputLink": {
+                                "__root_att": [
+                                    "mid_csp_cbf/sub_elt/subarray_01/outputLinksDistribution"
+                                ]
+                            },
                             "obsMode": {
                                 "abs_change": [
                                     "-1",
