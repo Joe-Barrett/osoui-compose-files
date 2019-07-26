@@ -2,7 +2,7 @@
 MAKEPATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 BASEDIR := $(notdir $(patsubst %/,%,$(dir $(MAKEPATH))))
 
-COMPOSE_FILES := $(wildcard *.yml)
+COMPOSE_FILES := $(filter-out ds-config.yml,$(wildcard *.yml))
 COMPOSE_FILE_ARGS := $(foreach yml,$(COMPOSE_FILES),-f $(yml))
 
 ATTACH_COMPOSE_FILE_ARGS := $(foreach yml,$(filter-out tango.yml,$(COMPOSE_FILES)),-f $(yml))
@@ -97,7 +97,7 @@ debug:  ## start and debug all devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up
 
 down:  ## stop all services and tear down the system
-	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) down
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) -f ds-config.yml down
 ifneq ($(NETWORK_MODE),host)
 	docker network inspect $(NETWORK_MODE) &> /dev/null && ([ $$? -eq 0 ] && docker network rm $(NETWORK_MODE)) || true
 endif
@@ -117,11 +117,17 @@ oet: minimal  ## start the OET
 start: up ## start a service (usage: make start <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start $(SERVICE)
 
-tmc: up ## start TMC devices
+ds-config: minimal
+	$(DOCKER_COMPOSE_ARGS) docker-compose -f ds-config.yml -f tango.yml up -d
+	@echo Waiting for Tango DB to be populated
+	@docker wait tmc-dsconfig > /dev/null
+	@docker wait sdp-dsconfig > /dev/null
+	@docker wait csp-dsconfig > /dev/null
+	@echo Complete
+	@$(MAKE) down
+
+mvp: up ## start MVP devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
-		sdp-dsconfig \
-		tmc-dsconfig \
-		csp-dsconfig \
 		sdpmaster \
 		sdpsubarray \
 		cspmaster \
@@ -150,7 +156,8 @@ tmc: up ## start TMC devices
 		subarraynode2 \
 		centralnode \
 		rsyslog-tmcprototype \
-		tm-alarmhandler
+		tm-alarmhandler \
+		oet
 
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)

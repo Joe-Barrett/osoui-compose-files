@@ -10,15 +10,23 @@ The files in this repository are made to be as environmentally independent as po
 
 ## Usage
 ``` bash
+# Create Tango DB and register all devices
+make ds-config
+
 # launch Tango and WebJive
 make up
 
-# optional: launch TMC devices
-make tmc
+# optional: launch MVP devices
+make mvp
 # optional: launch TangoTest device
 make start tangotest
 # optional: launch Jive (Java version)
 make start jive
+
+# optional: launch OET
+make oet
+# optional: connect to OET. <ctrl><p> + <ctrl><q> to exit
+docker attach oet
 
 # stop all containers
 make down
@@ -63,6 +71,3 @@ Then open `docs/build/html/index.html` in your chosen browser.
 # Online demo
 
 http://integration.engageska-portugal.pt/testdb (log in with user1/abc123)
-
-
-

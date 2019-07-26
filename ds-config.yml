@@ -1,0 +1,47 @@
+version: "2.2"
+
+services:
+  csp-dsconfig:
+    image: ${DOCKER_REGISTRY_HOST}/ska-docker/tango-dsconfig:latest
+    network_mode: ${NETWORK_MODE}
+    container_name: ${CONTAINER_NAME_PREFIX}csp-dsconfig
+    depends_on:
+      - databaseds
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    init: true
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             json2tango -w -a -u /tmc-prototype/data/csp-devices.json"
+    volumes:
+      - .:/tmc-prototype
+
+  sdp-dsconfig:
+    image: ${DOCKER_REGISTRY_HOST}/ska-docker/tango-dsconfig:latest
+    network_mode: ${NETWORK_MODE}
+    container_name: ${CONTAINER_NAME_PREFIX}sdp-dsconfig
+    depends_on:
+      - databaseds
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    init: true
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             json2tango -w -a -u /tmc-prototype/data/sdp-devices.json"
+    volumes:
+      - .:/tmc-prototype
+
+  tmc-dsconfig:
+    image: ${DOCKER_REGISTRY_HOST}/ska-docker/tango-dsconfig:latest
+    network_mode: ${NETWORK_MODE}
+    container_name: ${CONTAINER_NAME_PREFIX}tmc-dsconfig
+    depends_on:
+      - databaseds
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    init: true
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             json2tango -w -a -u /tmc-prototype/data/tmc-devices.json"
+    volumes:
+      - .:/tmc-prototype

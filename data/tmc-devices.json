@@ -216,6 +216,11 @@
                                     "mid_d0001/elt/master/healthState"
                                 ]
                             },
+                            "dishPointingState": {
+                                "__root_att": [
+                                    "mid_d0001/elt/master/pointingState"
+                                ]
+                            },
                             "healthState": {
                                 "abs_change": [
                                     "-1",
@@ -255,6 +260,11 @@
                             "dishHealthState": {
                                 "__root_att": [
                                     "mid_d0002/elt/master/healthState"
+                                ]
+                            },
+                            "dishPointingState": {
+                                "__root_att": [
+                                    "mid_d0002/elt/master/pointingState"
                                 ]
                             },
                             "healthState": {
@@ -298,6 +308,11 @@
                                     "mid_d0003/elt/master/healthState"
                                 ]
                             },
+                            "dishPointingState": {
+                                "__root_att": [
+                                    "mid_d0003/elt/master/pointingState"
+                                ]
+                            },
                             "healthState": {
                                 "abs_change": [
                                     "-1",
@@ -337,6 +352,11 @@
                             "dishHealthState": {
                                 "__root_att": [
                                     "mid_d0004/elt/master/healthState"
+                                ]
+                            },
+                            "dishPointingState": {
+                                "__root_att": [
+                                    "mid_d0004/elt/master/pointingState"
                                 ]
                             },
                             "healthState": {
@@ -425,6 +445,11 @@
                                     "mid_csp/elt/subarray01/healthState"
                                 ]
                             },
+                            "cspsubarrayObsState": {
+                                "__root_att": [
+                                    "mid_csp/elt/subarray01/obsState"
+                                ]
+                            },
                             "healthState": {
                                 "abs_change": [
                                     "-1",
@@ -506,6 +531,11 @@
                             "sdpSubarrayHealthState": {
                                 "__root_att": [
                                     "mid_sdp/elt/subarray_00/healthState"
+                                ]
+                            },
+                            "sdpSubarrayObsState": {
+                                "__root_att": [
+                                    "mid_sdp/elt/subarray_00/obsState"
                                 ]
                             },
                             "storageLoggingLevel": {
