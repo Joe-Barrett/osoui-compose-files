@@ -156,8 +156,7 @@ mvp: up ## start MVP devices
 		subarraynode2 \
 		centralnode \
 		rsyslog-tmcprototype \
-		tm-alarmhandler \
-		oet
+		tm-alarmhandler
 
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)
