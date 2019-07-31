@@ -38,7 +38,7 @@ services:
              /venv/bin/python -u /app/skabase/SKALogger/SKALogger.py Ref -v4"
 
   dishmaster1:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -55,7 +55,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   dishmaster2:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -72,7 +72,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   dishmaster3:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -89,7 +89,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   dishmaster4:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -106,7 +106,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   dishleafnode1:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -125,7 +125,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   dishleafnode2:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -144,7 +144,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   dishleafnode3:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -163,7 +163,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   dishleafnode4:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -182,7 +182,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   cspsubarrayleafnode:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -201,7 +201,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   cspmasterleafnode:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -220,7 +220,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   sdpsubarrayleafnode:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -239,7 +239,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   sdpmasterleafnode:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -258,7 +258,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   subarraynode1:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -287,7 +287,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   subarraynode2:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype
@@ -316,7 +316,7 @@ services:
       - rsyslog-tmcprototype:rw
 
   centralnode:
-    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:latest
+    image: ${DOCKER_REGISTRY_HOST}/tango-example/tmcprototype:${TMC_VERSION}
     depends_on:
       - databaseds
       - rsyslog-tmcprototype

@@ -22,6 +22,8 @@ services:
     stdin_open: true
     tty: true
     init: True
+    volumes:
+      - ./:/host/:ro
     entrypoint:
       - /usr/local/bin/wait-for-it.sh
       - ${TANGO_HOST}

@@ -31,7 +31,7 @@ services:
       - -v4
 
   sdpsubarray:
-    image: ${DOCKER_REGISTRY_HOST}/sdp-prototype/tangods_sdp_subarray:0.2.1
+    image: ${DOCKER_REGISTRY_HOST}/sdp-prototype/tangods_sdp_subarray:0.2.2
     container_name: ${CONTAINER_NAME_PREFIX}sdp_subarray
     network_mode: ${NETWORK_MODE}
     depends_on:
