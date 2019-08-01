@@ -43,4 +43,6 @@ The following Docker services are defined:
 +-----------------+------------------------------------------------+
 | traefik         | Reverse proxy used for WebJive HTTP routing    |
 +-----------------+------------------------------------------------+
+| oet-ssh         | Observation Tool Command Line Interface        |
++-----------------+------------------------------------------------+
 

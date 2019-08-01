@@ -161,6 +161,17 @@ mvp: up ## start MVP devices
 		rsyslog-tmcprototype \
 		tm-alarmhandler
 
+test-cli: mvp  ## test the OET command line interface via scripting
+	docker run -it --rm -d \
+	-e TANGO_HOST=$(TANGO_HOST) \
+	--user tango \
+	--network=$(NETWORK_MODE) -v $(CURDIR)/test-harness:/app/test-harness \
+	--name oet-test "nexus.engageska-portugal.pt/ska-telescope/oet-ssh:latest" \
+	 /bin/bash -c "/app/test-harness/run_test.sh"
+	docker attach oet-test
+	$(MAKE) down; \
+	exit $$status
+
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)
 
