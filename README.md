@@ -28,6 +28,11 @@ make oet
 # optional: connect to OET. <ctrl><p> + <ctrl><q> to exit
 docker attach oet
 
+# optional: run a basic integration test against the mvp configuration  using the OET interface
+# errors are displayed on screen - results from the last run are written to 'report.txt' in the 
+# test-harness folder. 
+make test-cli
+
 # stop all containers
 make down
 ```
