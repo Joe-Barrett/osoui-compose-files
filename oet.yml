@@ -38,4 +38,10 @@ services:
     volumes:
       - ./:/host/:ro
     entrypoint:
-      - bash
+      - /usr/local/bin/wait-for-it.sh
+      - ${TANGO_HOST}
+      - --timeout=30
+      - --strict
+      - --
+      - /venv/bin/itango3
+      - --profile=ska
