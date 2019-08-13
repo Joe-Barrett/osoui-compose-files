@@ -80,7 +80,7 @@ else
 endif
 
 # image tag to use for TMC containers
-TMC_VERSION := 0.1.1-213f320
+TMC_VERSION := latest
 
 
 DOCKER_COMPOSE_ARGS := DISPLAY=$(DISPLAY) XAUTHORITY=$(XAUTHORITY) TANGO_HOST=$(TANGO_HOST) \
