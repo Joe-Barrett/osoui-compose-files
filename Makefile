@@ -120,6 +120,12 @@ oet: minimal  ## start the OET
 start: up ## start a service (usage: make start <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start $(SERVICE)
 
+export_dashboards: webjive  ## export WebJive dashboards
+	docker exec -i mongodb mongodump --archive > data/mongo/dashboards.dump
+
+import_dashboards: webjive ## import WebJive dashboards
+	docker exec -i mongodb mongorestore --archive < data/mongo/dashboards.dump
+
 ds-config: minimal
 	$(DOCKER_COMPOSE_ARGS) docker-compose -f ds-config.yml -f tango.yml up -d
 	@echo Waiting for Tango DB to be populated
