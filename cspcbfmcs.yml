@@ -27,6 +27,11 @@ services:
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}cbfsubarray01
     depends_on:
+      - databaseds
+      - vcc001
+      - vcc002
+      - vcc003
+      - vcc004
       - cbfmaster
     environment:
       - TANGO_HOST=${TANGO_HOST}
