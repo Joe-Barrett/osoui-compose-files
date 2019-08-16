@@ -19,9 +19,16 @@ services:
     environment:
       - TANGO_HOST=${TANGO_HOST}
     init: true
-    stdin_open: true
-    entrypoint: ["python", "SDPMaster"]
-    command: ["1", "-v4"]
+    entrypoint:
+      - /usr/local/bin/wait-for-it.sh
+      - ${TANGO_HOST}
+      - --timeout=60
+      - --strict
+      - --
+      - /venv/bin/python
+      - SDPMaster
+      - "1"
+      - -v4
 
   sdpsubarray:
     image: ${DOCKER_REGISTRY_HOST}/sdp-prototype/tangods_sdp_subarray:latest
@@ -32,6 +39,13 @@ services:
     environment:
       - TANGO_HOST=${TANGO_HOST}
     init: true
-    stdin_open: true
-    entrypoint: ["python", "SDPSubarray"]
-    command: ["1", "-v4"]
+    entrypoint:
+      - /usr/local/bin/wait-for-it.sh
+      - ${TANGO_HOST}
+      - --timeout=60
+      - --strict
+      - --
+      - /venv/bin/python
+      - SDPSubarray
+      - "1"
+      - -v4
