@@ -13,7 +13,7 @@ services:
     init: true
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
-             tango_admin --ping-device mid_csp_cbf/sub_elt/master 10 &&\
+             retry --max=5 -- tango_admin --ping-device mid_csp_cbf/sub_elt/master &&\
              /venv/bin/python -u /app/csplmc/CspMaster/CspMaster/CspMaster.py 01 -v4"
 
   cspsubarray:
@@ -28,4 +28,5 @@ services:
     init: true
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             retry --max=5 -- tango_admin --ping-device mid_csp/elt/master 10 &&\
              /venv/bin/python -u /app/csplmc/CspSubarray/CspSubarray/CspSubarray.py 01 -v4"

@@ -11,9 +11,12 @@ OET with:
   make oet
   docker attach oet
 
-... and the commands at the command prompt.
+... and then execute the commands below at the command prompt.
 
 """
+
+# change directory to this folder
+cd /host/sp354
 
 # start up the telescope, turning DISH master devices on
 telescope = SKAMid()
@@ -24,9 +27,16 @@ subarray = SubArray(1)
 allocation = ResourceAllocation(dishes=[Dish(1), Dish(2)])
 subarray.allocate(allocation)
 
-# Configure the sub-array to point at Polaris using RX band 1
-polaris = SubArrayConfiguration(SkyCoord.from_name('polaris'), 'polaris', receiver_band='1')
-subarray.configure(polaris)
+# Load and configure a sub-array from a CDM definition file
+# This CDM configures for a Band 1 observation of Polaris.
+subarray.configure_from_file('polaris_b1.json')
+
+# scan for 10 seconds
+subarray.scan(10.0)
+
+# We can't reconfigure a sub-array yet, so mark the end of
+# the observation
+subarray.end_sb()
 
 # (optional) deallocate all sub-array resources
 subarray.deallocate()
