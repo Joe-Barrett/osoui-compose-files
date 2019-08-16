@@ -332,10 +332,6 @@ services:
     command: >
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
              sudo ln -sf /var/run/rsyslog/dev/log /dev/log &&\
-             retry --max=5 -- tango_admin --ping-device ska_mid/tm_leaf_node/d0001 10 &&\
-             retry --max=5 -- tango_admin --ping-device ska_mid/tm_leaf_node/d0002 10 &&\
-             retry --max=5 -- tango_admin --ping-device ska_mid/tm_leaf_node/d0003 10 &&\
-             retry --max=5 -- tango_admin --ping-device ska_mid/tm_leaf_node/d0004 10 &&\
              retry --max=5 -- tango_admin --ping-device ska_mid/tm_leaf_node/csp_master 10 &&\
              retry --max=5 -- tango_admin --ping-device ska_mid/tm_leaf_node/sdp_master 10 &&\
              retry --max=5 -- tango_admin --ping-device ska_mid/tm_subarray_node/1 10 &&\
@@ -348,37 +344,6 @@ services:
     image: jumanjiman/rsyslog
     container_name: ${CONTAINER_NAME_PREFIX}rsyslog
     network_mode: ${NETWORK_MODE}
-
-# Required for future use
-#  configurelogger:
-#    image: ${DOCKER_REGISTRY_HOST}/${DOCKER_REGISTRY_USER}/tmcprototype:latest
-#    depends_on:
-#      - tmclogger
-#      - dishmaster1
-#      - dishmaster2
-#      - dishmaster3
-#      - dishmaster4
-#      - sdpmaster
-#      - cspsubarray
-#      - sdpsubarray
-#      - dishleafnode1
-#      - dishleafnode2
-#      - dishleafnode3
-#      - dishleafnode4
-#      - cspmasterleafnode
-#      - sdpmasterleafnode
-#      - subarraynode1
-#      - subarraynode2
-#      - sdpsubarrayleafnode
-#      - cspsubarrayleafnode
-#      - centralnode
-#    network_mode: ${NETWORK_MODE}
-#    container_name: ${CONTAINER_NAME_PREFIX}configurelogger
-#    environment:
-#    - TANGO_HOST=${TANGO_HOST}
-#    command: >
-#      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
-#            /venv/bin/python /app/tmcprototype/configure_logging.py"
 
   tm-alarmhandler:
     image: ${DOCKER_REGISTRY_HOST}/tango-example/tmalarmhandler
@@ -393,15 +358,3 @@ services:
       sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
             ./app/alarmhandler-srv 01 -v4"
 
-# For future use
-#  dsconfigdump:
-#    image: nexus.engageska-portugal.pt/ska-docker/tango-dsconfig:latest
-#    network_mode: ${NETWORK_MODE}
-#    container_name: ${CONTAINER_NAME_PREFIX}dsconfigdump
-#    depends_on:
-#      - databaseds
-#    environment:
-#      - TANGO_HOST=${TANGO_HOST}
-#    command: >
-#      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
-#             python -m dsconfig.dump && sleep infinity"
