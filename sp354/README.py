@@ -11,9 +11,12 @@ OET with:
   make oet
   docker attach oet
 
-... and execute the commands below at the command prompt.
+... and then execute the commands below at the command prompt.
 
 """
+
+# change directory to this folder
+cd /host/sp354
 
 # start up the telescope, turning DISH master devices on
 telescope = SKAMid()
