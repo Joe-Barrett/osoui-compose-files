@@ -11,7 +11,7 @@ version: "2.2"
 
 services:
   sdpmaster:
-    image: ${DOCKER_REGISTRY_HOST}/sdp-prototype/tangods_sdp_master:0.2.1-2da80e2f
+    image: ${DOCKER_REGISTRY_HOST}/sdp-prototype/tangods_sdp_master:latest
     container_name: ${CONTAINER_NAME_PREFIX}sdp_master
     network_mode: ${NETWORK_MODE}
     depends_on:
@@ -31,7 +31,7 @@ services:
       - -v4
 
   sdpsubarray:
-    image: ${DOCKER_REGISTRY_HOST}/sdp-prototype/tangods_sdp_subarray:0.5.6-e942a23e
+    image: ${DOCKER_REGISTRY_HOST}/sdp-prototype/tangods_sdp_subarray:latest
     container_name: ${CONTAINER_NAME_PREFIX}sdp_subarray
     network_mode: ${NETWORK_MODE}
     depends_on:
