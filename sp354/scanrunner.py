@@ -29,6 +29,6 @@ with open(scan_sequence_file, 'r') as csv_file:
         subarray.configure_from_file(exported_cdm)
 
         print('Scanning for {} seconds'.format(scan_duration))
-        subarray.scan(scan_duration)
+        subarray.scan(float(scan_duration))
 
     subarray.end_sb()
