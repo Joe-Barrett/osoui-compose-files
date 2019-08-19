@@ -137,6 +137,7 @@ ds-config: minimal
 
 mvp: up ## start MVP devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
+		oet \
 		sdpmaster \
 		sdpsubarray \
 		cspmaster \

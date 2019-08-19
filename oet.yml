@@ -13,7 +13,7 @@
 version: '2.2'
 
 services:
-  itango:
+  oet:
     image: nexus.engageska-portugal.pt/ska-telescope/oet:latest
     container_name: ${CONTAINER_NAME_PREFIX}oet
     network_mode: ${NETWORK_MODE}

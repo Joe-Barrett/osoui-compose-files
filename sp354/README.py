@@ -8,7 +8,6 @@ OET with:
   make ds-config
   make import_dashboards
   make mvp
-  make oet
   docker attach oet
 
 ... and then execute the commands below at the command prompt.
