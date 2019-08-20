@@ -15,7 +15,7 @@ OET with:
 """
 
 # change directory to this folder
-cd /host/sp354
+  cd /host/sp354
 
 # start up the telescope, turning DISH master devices on
 telescope = SKAMid()
