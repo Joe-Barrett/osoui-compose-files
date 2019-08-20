@@ -21,7 +21,15 @@ This folder contains:
 
 ## Launching the integrated environment
 
-To register Tango devices and start the integrated environment, execute:
+First, pull the latest images to be sure you're not using anything outdated.
+
+```bash
+# pull the images referenced in the docker-compose definitions, including
+# the latest builds of anything tagged :latest.
+make pull
+```
+
+Register the Tango devices and start the integrated environment with
 
 ``` bash
 # register the MVP devices with the Tango database
@@ -76,7 +84,7 @@ subarray.deallocate()
 telescope.standby()
 ```
 
-Execute <kbd>ctrl</kbd>+<kbd>p</kbd> <kbd>ctrl</kbd>+<kbd>q</kbd> to detach
+Press <kbd>ctrl</kbd>+<kbd>p</kbd> <kbd>ctrl</kbd>+<kbd>q</kbd> to detach
 from the itango session.
 
 ## scanrunner.py execution
