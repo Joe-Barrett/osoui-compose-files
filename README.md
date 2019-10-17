@@ -12,14 +12,18 @@ The files in this repository are made to be as environmentally independent as po
 ``` bash
 # Create Tango DB and register all devices
 make ds-config
+# (optional) Restore WebJive dashboards
+make import_dashboards
 
 # launch Tango and WebJive
 make up
 
-# optional: launch MVP devices
+# optional: launch MVP devices (CSP/DISH/SDP)
 make mvp
 # optional: launch TangoTest device
 make start tangotest
+# optional: launch Webjive test device (A device for testing particular Webjive features)
+make start webjivetestdevice
 # optional: launch Jive (Java version)
 make start jive
 

@@ -23,6 +23,7 @@ WebJive General documentation is available in the following link: https://webjiv
    usage
    contribution
    device
+   architecture
 
 
 Prerequsities

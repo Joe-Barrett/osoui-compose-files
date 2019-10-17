@@ -80,7 +80,7 @@ else
 endif
 
 # image tag to use for TMC containers
-TMC_VERSION := 0.1.1-213f320
+TMC_VERSION := 0.1.3
 
 
 DOCKER_COMPOSE_ARGS := DISPLAY=$(DISPLAY) XAUTHORITY=$(XAUTHORITY) TANGO_HOST=$(TANGO_HOST) \
@@ -120,6 +120,12 @@ oet: minimal  ## start the OET
 start: up ## start a service (usage: make start <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start $(SERVICE)
 
+export_dashboards: webjive  ## export WebJive dashboards
+	docker exec -i mongodb mongodump --archive > data/mongo/dashboards.dump
+
+import_dashboards: webjive ## import WebJive dashboards
+	docker exec -i mongodb mongorestore --archive < data/mongo/dashboards.dump
+
 ds-config: minimal
 	$(DOCKER_COMPOSE_ARGS) docker-compose -f ds-config.yml -f tango.yml up -d
 	@echo Waiting for Tango DB to be populated
@@ -131,6 +137,7 @@ ds-config: minimal
 
 mvp: up ## start MVP devices
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start \
+		oet \
 		sdpmaster \
 		sdpsubarray \
 		cspmaster \
