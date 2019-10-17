@@ -22,6 +22,8 @@ make up
 make mvp
 # optional: launch TangoTest device
 make start tangotest
+# optional: launch Webjive test device (A device for testing particular Webjive features)
+make start webjivetestdevice
 # optional: launch Jive (Java version)
 make start jive
 
