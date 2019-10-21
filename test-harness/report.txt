@@ -1,53 +1,12 @@
-spawn /venv/bin/itango3 --profile=ska --no-color-info --simple-prompt --no-banner
-]0;IPython: /app
-Welcome to the SKA
-
-
-Importing OET domain objects
-
-You can now use :  ['Dish', 'DishAllocation', 'List', 'Optional', 'ResourceAllocation', 'SKAMid', 'SubArray']
-
-In [1]: telescope = SKAMid()
-
-In [2]: subarray = SubArray(1)
-
-In [3]: allocation = ResourceAllocation(dishes=[Dish(1)])
-
-In [4]: telescope.start_up()
-
-In [5]: subarray.deallocate()
-CentralNode_CommandFailed:  Error occurred while releasing resources from the Subarray 
-DevFailed[
-DevError[
-    desc =  Exception occurred in ReleaseAllResources command.Resources are already released from Subarray
-           
-  origin = ReleaseAllResources command execution
-  reason = SubarrayNode_Commandfailed
-severity = ERR]
-
-DevError[
-    desc = Failed to execute command_inout on device ska_mid/tm_subarray_node/1, command ReleaseAllResources
-  origin = Connection::command_inout()
-  reason = API_CommandFailed
-severity = ERR]
-]
-
-(For more detailed information type: tango_error)
-
-In [6]: subarray.allocate(allocation)
-Out[6]: <ResourceAllocation(dishes=[<Dish(1)>])>
-
-In [7]: subarray_proxy = DeviceProxy('ska_mid/tm_subarray_node/1')
-
-In [8]: subarray_proxy.receptorIDList
-Out[8]: (1,)
-
-In [9]: subarray.deallocate()
-Out[9]: <ResourceAllocation(dishes=[<Dish(1)>])>
-
-In [10]: subarray_proxy.receptorIDList
-
-In [11]: telescope.standby()
-
-In [12]: exit
-
+Scripting the OET to test devices
+Installing dependencies - expect is needed to run script
+------------------------
+debconf: delaying package configuration, since apt-utils is not installed
+install complete
+testing the telescope ...
+As a user I want to be able to activate the telescope...Success
+As a user I want to be able to allocate a subarray...Success
+As a user I want to be able to deallocate a subarray...Success
+As a user I want to be able to deactivate the telescope...Success
+All Tests Successful
+test complete
