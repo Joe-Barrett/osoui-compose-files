@@ -1,0 +1,12 @@
+Scripting the OET to test devices
+Installing dependencies - expect is needed to run script
+------------------------
+debconf: delaying package configuration, since apt-utils is not installed
+install complete
+testing the telescope ...
+As a user I want to be able to activate the telescope...Success
+As a user I want to be able to allocate a subarray...Success
+As a user I want to be able to deallocate a subarray...Success
+As a user I want to be able to deactivate the telescope...Success
+All Tests Successful
+test complete

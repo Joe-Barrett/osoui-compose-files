@@ -4,8 +4,12 @@
 # Connect to the interactive session with 'docker attach itango'.
 # Disconnect with the Docker deattach sequence: <CTRL>+<P> <CTRL>+<Q>
 #
+# For the integration server we also have a version of the OET that
+# provides SSH access. This is also launched for testing purposes
+#
 # Defines:
-#   - itango: iTango interactive session
+#   - oet: iTango based interactive session (oet command line)
+#   - oet-ssh: (oet command line with ssh support)
 #
 # Requires: 
 #   - tango.yml
@@ -13,6 +17,15 @@
 version: '2.2'
 
 services:
+  oet-ssh:
+    image: nexus.engageska-portugal.pt/ska-telescope/oet-ssh:latest
+    container_name: ${CONTAINER_NAME_PREFIX}oet-ssh
+    network_mode: ${NETWORK_MODE}
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    init: True
+    ports:
+      - '2022:22'
   oet:
     image: nexus.engageska-portugal.pt/ska-telescope/oet:latest
     container_name: ${CONTAINER_NAME_PREFIX}oet

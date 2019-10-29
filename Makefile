@@ -42,7 +42,7 @@ CONTAINER_NAME_PREFIX :=
 endif
 
 ifeq ($(OS),Windows_NT)
-    $(error Sorry, Windows is not supported yet)
+	$(error Sorry, Windows is not supported yet)
 else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
@@ -167,6 +167,11 @@ mvp: up ## start MVP devices
 		centralnode \
 		rsyslog-tmcprototype \
 		tm-alarmhandler
+
+test-cli: mvp ## test the OET command line interface via scripting
+	docker cp $(CURDIR)/test-harness oet:/app
+	docker exec -it oet /bin/bash -c /app/test-harness/run_test.sh | tee test-harness/report.txt
+	@$(MAKE) down
 
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)
