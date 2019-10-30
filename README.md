@@ -5,10 +5,10 @@
 This repository hosts Docker Compose files which may be useful to developers working on the SKA Engineering UI tool. 
 At the moment this is primarily the SKA-OSO-UI team. 
 
-### Contributing
+## Contributing
 The files in this repository are made to be as environmentally independent as possible. **Please** ensure you do not check in any code which includes filepaths, this applies mostly to the `.env` file. Thanks :thumbsup:
 
-### Usage
+## Usage
 ``` bash
 # Create Tango DB and register all devices
 make ds-config
