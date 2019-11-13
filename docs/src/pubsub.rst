@@ -28,8 +28,8 @@ Go to a web-browser of choice and open the webjive suite:
 .\ |IMG1|\ 
 
 .. |IMG1| image:: _static/img/pubsub_1.png
-   :height: 322 px
-   :width: 601 px
+   :height: 130 px
+   :width: 438 px
 
 **Figure 1. Screenshot to show Webjive suite 'Devices' screen when user goes to ‘localhost:22484/testdb’ in web browser.**
 
@@ -47,8 +47,8 @@ After a short pause Jive should launch and present all available Tango devices. 
 .\ |IMG2|\
 
 .. |IMG2| image:: _static/img/pubsub_2.png
-   :height: 322 px
-   :width: 601 px
+   :height: 130 px
+   :width: 438 px
 
 **Figure 2. Screenshot to show location of sys/tg_test/1 using Tango Jive .**
 
@@ -60,8 +60,8 @@ In Polling, change polling attribute of double_scalar from default (3000) to 100
 .\ |IMG3|\
 
 .. |IMG3| image:: _static/img/pubsub_3.png
-   :height: 324 px
-   :width: 601 px
+   :height: 130 px
+   :width: 438 px
 
 **Figure 3. Screenshot to show the Attribute tab of sys/tg_test/1 Polling characteristics.**
 
@@ -73,8 +73,8 @@ In Event, select “Periodic event”, then for attribute “double_scalar” fr
 .\ |IMG4|\
 
 .. |IMG4| image:: _static/img/pubsub_4.png
-   :height: 156 px
-   :width: 432 px
+   :height: 130 px
+   :width: 438 px
 
 **Figure 4. Screenshot to show the Attribute tab of sys/tg_test/1 Event characteristics.**
 
@@ -141,6 +141,7 @@ In order to demonstrate how the pub/sub can be used to allow different device at
 
 Using Jive go to the Polling icon of “WebjiveTestDevice-->test-->WebjiveTestDevice-->test/webjivetestdevice/1”. For attribute RandomAttr, set the polling period to 500(ms) on the Attribute tab.  Ensure that the polled option is ticked.
 
+
 .\ |IMG10|\
 
 .. |IMG10| image:: _static/img/overview_10.png
@@ -151,6 +152,7 @@ Using Jive go to the Polling icon of “WebjiveTestDevice-->test-->WebjiveTestDe
 
 For the same Tango Device, select the Event icon. For the RandomAttr attribute set the period to 1000 (ms) on the Periodic event tab. Furthermore, RandomAttr has the Change Event set in order in order to send events if the current value differs by 1% from the previous value
 
+
 .\ |IMG11|\
 
 .. |IMG11| image:: _static/img/overview_11.png
@@ -160,6 +162,8 @@ For the same Tango Device, select the Event icon. For the RandomAttr attribute s
 **Figure 11. Screenshot to show Tango Jive and Attribute tab in which the Event characteristics of the selected attribute needs to be activated and an interval be stated.**
 
 Once the tango devices have been set up in Jive, go back to the webjive suite and drag a new Attribute Display widget onto the canvas. Set up the Attribute display widget to present the RandomAttr device attribute values in Webjive.
+
+
 .\ |IMG12|\
 
 .. |IMG12| image:: _static/img/overview_12.png
