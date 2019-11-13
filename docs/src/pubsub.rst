@@ -85,7 +85,7 @@ Note.  If webjive suite is already running, in order to apply these new polling 
 
 .\ |IMG5|\
 
-.. |IMG5| image:: _static/img/overview_5.png
+.. |IMG5| image:: _static/img/pubsub_5.png
    :height: 130 px
    :width: 438 px
 
@@ -95,7 +95,7 @@ Now you should go in to the devices list and ensure that “sys/tg_test/1” is 
 
 .\ |IMG6|\
 
-.. |IMG6| image:: _static/img/overview_6.png
+.. |IMG6| image:: _static/img/pubsub_6.png
    :height: 130 px
    :width: 438 px
 
@@ -108,7 +108,7 @@ Once the tango test device is confirmed as RUNNING, go to the ‘Dashboard’ of
 
 .\ |IMG7|\
 
-.. |IMG7| image:: _static/img/overview_7.png
+.. |IMG7| image:: _static/img/pubsub_7.png
    :height: 130 px
    :width: 438 px
 
@@ -118,7 +118,7 @@ Once set up, click on the “Start” button to run the dashboard.  After a shor
 
 .\ |IMG8|\
 
-.. |IMG8| image:: _static/img/overview_8.png
+.. |IMG8| image:: _static/img/pubsub_8.png
    :height: 130 px
    :width: 438 px
 
@@ -133,7 +133,7 @@ In order to demonstrate how the pub/sub can be used to allow different device at
 
 .\ |IMG9|\
 
-.. |IMG9| image:: _static/img/overview_9.png
+.. |IMG9| image:: _static/img/pubsub_9.png
    :height: 130 px
    :width: 438 px
 
@@ -144,7 +144,7 @@ Using Jive go to the Polling icon of “WebjiveTestDevice-->test-->WebjiveTestDe
 
 .\ |IMG10|\
 
-.. |IMG10| image:: _static/img/overview_10.png
+.. |IMG10| image:: _static/img/pubsub_10.png
    :height: 130 px
    :width: 438 px
 
@@ -155,7 +155,7 @@ For the same Tango Device, select the Event icon. For the RandomAttr attribute s
 
 .\ |IMG11|\
 
-.. |IMG11| image:: _static/img/overview_11.png
+.. |IMG11| image:: _static/img/pubsub_11.png
    :height: 130 px
    :width: 438 px
 
@@ -166,7 +166,7 @@ Once the tango devices have been set up in Jive, go back to the webjive suite an
 
 .\ |IMG12|\
 
-.. |IMG12| image:: _static/img/overview_12.png
+.. |IMG12| image:: _static/img/pubsub_12.png
    :height: 130 px
    :width: 438 px
 
