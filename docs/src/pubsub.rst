@@ -3,9 +3,9 @@ Demonstrating Webjive Suite Publish / Subscribe
 
 When subscription to an attribute is made, the Webjive suite establishes the type of polling mechanism that attribute uses.  With this knowledge the Webjive suite determines and selects the most appropriate way to interact with Tango. If Tango events are set up for that attribute, they will be used. However if they aren't the Webjive suite reverts back to using the original mechanism of TangoGQL polling the attribute then publishing updates to the webjive user interface when it changes.
 
-This page shows how to set up the Webjive suite public / subscribe (pub/sub) mechanism using the ‘tangotest’ and ‘webjivetestdevice’ tango device servers. When setting up pub/sub for your own tango devices, you should substitute the aforementioned tango devices with your own.
+This page shows how to set up the Webjive suite publish / subscribe (pub/sub) mechanism using the ‘tangotest’ and ‘webjivetestdevice’ tango device servers. When setting up pub/sub for your own tango devices, you should substitute the aforementioned tango devices with your own.
 
-To follow this guide you will need to have an instance of webjive suite and Tango Jive running locally. The easiest way of doing this is to use the images available through the Gitlab repository ska-engineering-ui-compose-utils.
+To follow this guide you will need to have an instance of Webjive suite and Tango Jive running locally. The easiest way of doing this is to use the images available through the Gitlab repository ska-engineering-ui-compose-utils.
 
 
 
@@ -19,9 +19,9 @@ Using a terminal, go to the ska-engneering-ui-compose-utils. Using the following
 * make start tangotest
 * make  start webjivetestdevice
 
-Go to a web-browser of choice and open the webjive suite:
+Go to a web-browser of choice and open the Webjive suite:
 
-‘http://localhost:22484/testdb/devices’
+http://localhost:22484/testdb/devices
 
 
 
@@ -81,7 +81,7 @@ In Event, select “Periodic event”, then for attribute “double_scalar” fr
 
 Verifying in Webjive Suite
 --------------------------
-Note.  If webjive suite is already running, in order to apply these new polling and event settings, it is advised to stop and then restart webjive suite.
+Note.  If Webjive suite is already running, in order to apply these new polling and event settings, it is advised to stop and then restart Webjive suite.
 
 .\ |IMG5|\
 
@@ -89,7 +89,7 @@ Note.  If webjive suite is already running, in order to apply these new polling 
    :height: 130 px
    :width: 438 px
 
-**Figure 5. Screenshot to show the available Tango devcies in webjive suite.**
+**Figure 5. Screenshot to show the available Tango devcies in Webjive suite.**
 
 Now you should go in to the devices list and ensure that “sys/tg_test/1” is in a running state. This can be confirmed by looking at the top of the right hand side pane of the browser, a green box with “RUNNING” written in it should be visible. If it is not present, the tango test image was not successfully launched, and so this step should be run using the ‘make start tangotest’ command from the terminal.
 
@@ -101,7 +101,7 @@ Now you should go in to the devices list and ensure that “sys/tg_test/1” is 
 
 **Figure 6. Screenshot to show the Scalar Attributes of the sys/tg_test/1 Tango device.**
 
-Once the tango test device is confirmed as RUNNING, go to the ‘Dashboard’ of the webjive suite. From the right hand side widget menu, select the “Attribute Display” widget and drag and drop an instance over onto the left hand side canvas.  Configure the widget as:
+Once the tango test device is confirmed as RUNNING, go to the ‘Dashboard’ of the Webjive suite. From the right hand side widget menu, select the “Attribute Display” widget and drag and drop an instance over onto the left hand side canvas.  Configure the widget as:
 
 - Device: sys/tg_test/1
 - Attribute: double_scalar
@@ -112,7 +112,7 @@ Once the tango test device is confirmed as RUNNING, go to the ‘Dashboard’ of
    :height: 130 px
    :width: 438 px
 
-**Figure 7. Screenshot to show the Attribute display widget being set up on the webjive suite dashboard.**
+**Figure 7. Screenshot to show the Attribute display widget being set up on the Webjive suite dashboard.**
 
 Once set up, click on the “Start” button to run the dashboard.  After a short pause you should see the displayed attribute value update.
 
@@ -128,8 +128,8 @@ Comparison
 ==========
 In order to demonstrate how the pub/sub can be used to allow different device attributes to be presented at different periodicity, the same process should be repeated for the device webjivetestdevice. The Tango device webjivetestdevice was created to allow the pub/sub mechanism to be demonstrated.  It facilitates this by allowing a greater ability to configure polling and event periodicity that what can be achieved with the tg_test device. The tg_test device is limited to only changing its value every second - so even if polling is set to more frequently you won't see any difference, hence webjivetestdevice was written which does not have this restriction.
 
-- Tango Device: test/webjivetestdevice/1
-- Attribute: RandomAttr
+* Tango Device: test/webjivetestdevice/1
+* Attribute: RandomAttr
 
 .\ |IMG9|\
 
@@ -150,7 +150,7 @@ Using Jive go to the Polling icon of “WebjiveTestDevice-->test-->WebjiveTestDe
 
 **Figure 10. Screenshot to show Tango Jive and Attribute tab in which the Polling characteristics of the selected attribute needs to be activated and an interval be stated.**
 
-For the same Tango Device, select the Event icon. For the RandomAttr attribute set the period to 1000 (ms) on the Periodic event tab. Furthermore, RandomAttr has the Change Event set in order in order to send events if the current value differs by 1% from the previous value
+For the same Tango Device, select the Event icon. For the RandomAttr attribute set the period to 1000 (ms) on the Periodic event tab. Furthermore, RandomAttr has the Change Event set in order to send events if the current value differs by 1% from the previous value
 
 
 .\ |IMG11|\
@@ -161,7 +161,7 @@ For the same Tango Device, select the Event icon. For the RandomAttr attribute s
 
 **Figure 11. Screenshot to show Tango Jive and Attribute tab in which the Event characteristics of the selected attribute needs to be activated and an interval be stated.**
 
-Once the tango devices have been set up in Jive, go back to the webjive suite and drag a new Attribute Display widget onto the canvas. Set up the Attribute display widget to present the RandomAttr device attribute values in Webjive.
+Once the tango devices have been set up in Jive, go back to the Webjive suite and drag a new Attribute Display widget onto the canvas. Set up the Attribute display widget to present the RandomAttr device attribute values in Webjive.
 
 
 .\ |IMG12|\
@@ -172,4 +172,4 @@ Once the tango devices have been set up in Jive, go back to the webjive suite an
 
 **Figure 12. Screenshot to show Webjive dashboard showing the double_scalar value of tg_test and webjiveTestDevice RandomAttr on seperate attribute display widgets.**
 
-Now run the webjive suite dashboard by clicking on the Start button.  If set up correctly you should see the two individual device attributes update at different intervals (as defined by the polling and event intervals set via Jive).
+Now run the Webjive suite dashboard by clicking on the Start button.  If set up correctly you should see the two individual device attributes update at different intervals (as defined by the polling and event intervals set via Jive).
