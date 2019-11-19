@@ -169,8 +169,16 @@ mvp: up ## start MVP devices
 		tm-alarmhandler
 
 test-cli: mvp ## test the OET command line interface via scripting
-	docker cp $(CURDIR)/test-harness oet:/app
-	docker exec -it oet /bin/bash -c /app/test-harness/run_test.sh | tee test-harness/report.txt
+	docker cp $(CURDIR)/test-harness $(CONTAINER_NAME_PREFIX)oet:/app
+	docker exec -it $(CONTAINER_NAME_PREFIX)oet /bin/bash -c /app/test-harness/run_test.sh | tee test-harness/report.txt
+	@$(MAKE) down
+
+test-webjive: webjive ## run webjive end-to-end tests
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start webjivetestdevice
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start webjive-e2e-test
+	docker cp $(CURDIR)/webjive-test-harness $(CONTAINER_NAME_PREFIX)webjive-e2e-test:/test
+	docker exec -i $(CONTAINER_NAME_PREFIX)mongodb mongorestore --archive < webjive-test-harness/test_dashboard.dump
+	docker exec -it $(CONTAINER_NAME_PREFIX)webjive-e2e-test python3 test/webjive_e2e_test.py
 	@$(MAKE) down
 
 stop:  ## stop a service (usage: make stop <servicename>)
