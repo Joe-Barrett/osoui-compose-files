@@ -126,6 +126,13 @@ export_dashboards: webjive  ## export WebJive dashboards
 import_dashboards: webjive ## import WebJive dashboards
 	docker exec -i mongodb mongorestore --archive < data/mongo/dashboards.dump
 
+add_dashboard: webjive
+	docker exec -i mongodb mongorestore --archive < $(DASHBOARD_PATH)
+
+delete_dashboard: webjive
+	echo $(DASHBOARD_NAME)
+	docker exec -i mongodb mongo dashboards --eval "db.dashboards.remove({'name': '$(DASHBOARD_NAME)'})"
+
 ds-config: minimal
 	$(DOCKER_COMPOSE_ARGS) docker-compose -f ds-config.yml -f tango.yml up -d
 	@echo Waiting for Tango DB to be populated
