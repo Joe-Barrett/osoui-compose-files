@@ -126,11 +126,10 @@ export_dashboards: webjive  ## export WebJive dashboards
 import_dashboards: webjive ## import WebJive dashboards
 	docker exec -i mongodb mongorestore --archive < data/mongo/dashboards.dump
 
-add_dashboard: webjive
+add_dashboard: webjive ## add a dashboard to WebJive (include path to dashboard dump in DASHBOARD_PATH variable)
 	docker exec -i mongodb mongorestore --archive < $(DASHBOARD_PATH)
 
-delete_dashboard: webjive
-	echo $(DASHBOARD_NAME)
+delete_dashboard: webjive ## delete a dashboard from WebJive (include dashboard name in DASHBOARD_NAME variable)
 	docker exec -i mongodb mongo dashboards --eval "db.dashboards.remove({'name': '$(DASHBOARD_NAME)'})"
 
 ds-config: minimal
@@ -182,10 +181,12 @@ test-cli: mvp ## test the OET command line interface via scripting
 
 test-webjive: webjive ## run webjive end-to-end tests
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start webjivetestdevice
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up --no-start webjive-e2e-test
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start webjive-e2e-test
 	docker cp $(CURDIR)/webjive-test-harness $(CONTAINER_NAME_PREFIX)webjive-e2e-test:/test
-	docker exec -i $(CONTAINER_NAME_PREFIX)mongodb mongorestore --archive < webjive-test-harness/test_dashboard.dump
-	docker exec -it $(CONTAINER_NAME_PREFIX)webjive-e2e-test python3 test/webjive_e2e_test.py
+	@$(MAKE) add_dashboard DASHBOARD_PATH=webjive-test-harness/PollingTestDashboard.dump
+	docker exec -it $(CONTAINER_NAME_PREFIX)webjive-e2e-test python3 test/webjive_e2e_test.py $(USERNAME) $(PASSWORD)
+	@$(MAKE) delete_dashboard DASHBOARD_NAME=PollingTestDashboard
 	@$(MAKE) down
 
 stop:  ## stop a service (usage: make stop <servicename>)
