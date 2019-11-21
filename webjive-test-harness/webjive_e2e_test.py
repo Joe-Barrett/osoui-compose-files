@@ -24,20 +24,20 @@ class WebjiveE2ETest:
                               + expected_title + "' but title is '" + driver.title + "'"
         if expected_title not in driver.title:
             print(page_load_error_msg)
-            return
+            return False
         print("SUCCESS")
 
         driver.find_element(By.LINK_TEXT, 'Dashboards').click()
         print("Logging in... ", end=" ")
         if not self.login(driver, username, password):
             print("FAILED. Could not log in")
-            return
+            return False
         print("SUCCESS")
 
         print("Opening dashboard... ", end=" ")
         if not self.open_dashboard(driver, "PollingTestDashboard"):
             print("FAILED. Could not open dashboard PollingTestDashboard")
-            return
+            return False
         print("SUCCESS")
 
         driver.find_element_by_css_selector(".form-inline > button").click()
@@ -48,7 +48,7 @@ class WebjiveE2ETest:
             randomattr1 = wait.until(ec.visibility_of_element_located((By.XPATH, "//div[@id='AttributeDisplay']"))).text
         except TimeoutException:
             print("FAILED.  Could not find webjivetestdevice")
-            return
+            return False
 
         print(randomattr1)
 
@@ -63,12 +63,13 @@ class WebjiveE2ETest:
         print(randomattr3)
 
         attributes_match_error_msg = "FAILED. Expected all values to be different. Instead got values " + \
-                                     randomattr1 + ", " + randomattr2 + " and " + randomattr3
+                                     randomattr1 + ", " + randomattr2 + " and " + randomattr3 + "\n"
 
-        if randomattr1 != randomattr2 and randomattr2 != randomattr3:
+        if randomattr1 == randomattr2 or randomattr2 == randomattr3:
             print(attributes_match_error_msg)
-            return
-        print("SUCCESS")
+            return False
+        print("SUCCESS\n")
+        return True
 
     def create_driver(self):
         chrome_options = webdriver.ChromeOptions()
@@ -99,7 +100,7 @@ class WebjiveE2ETest:
         password_field.send_keys(password)
 
         driver.find_element_by_css_selector(".btn-primary").click()
-        logged_in_as = driver.find_element_by_css_selector(".LogInOut").text
+        logged_in_as = wait.until(ec.presence_of_element_located((By.XPATH, "//div[@class='LogInOut']"))).text
         expected_welcome_message = "Logged in as " + username
         if expected_welcome_message in logged_in_as:
             return True
@@ -116,7 +117,13 @@ class WebjiveE2ETest:
 
 
 if __name__ == "__main__":
+    test_status = []
     if len(sys.argv) != 3:
         print("Username and password required as arguments")
+        test_status.append(False)
     else:
-        WebjiveE2ETest().test_webjive_pubsub(sys.argv[1], sys.argv[2])
+        test_status.append(WebjiveE2ETest().test_webjive_pubsub(sys.argv[1], sys.argv[2]))
+    total = len(test_status)
+    passed = sum(test_status)
+    failed = total - passed
+    print("Ran " + str(total) + " tests.  " + str(passed) + " passed and " + str(failed) + " failed.\n")

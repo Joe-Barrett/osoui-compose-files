@@ -37,6 +37,11 @@ docker attach oet
 # test-harness folder. 
 make test-cli
 
+# optional: run end-to-end tests against the integrated WebJive and TangoGQL system
+# results are written into report.txt in webjive-test-harness folder
+# Current tests include: pub/sub implementation
+make test-webjive USERNAME=user1 PASSWORD=abc123
+
 # stop all containers
 make down
 ```

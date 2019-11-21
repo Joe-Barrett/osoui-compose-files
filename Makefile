@@ -180,12 +180,13 @@ test-cli: mvp ## test the OET command line interface via scripting
 	@$(MAKE) down
 
 test-webjive: webjive ## run webjive end-to-end tests
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up --no-start webjivetestdevice
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start webjivetestdevice
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up --no-start webjive-e2e-test
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) start webjive-e2e-test
 	docker cp $(CURDIR)/webjive-test-harness $(CONTAINER_NAME_PREFIX)webjive-e2e-test:/test
 	@$(MAKE) add_dashboard DASHBOARD_PATH=webjive-test-harness/PollingTestDashboard.dump
-	docker exec -it $(CONTAINER_NAME_PREFIX)webjive-e2e-test python3 test/webjive_e2e_test.py $(USERNAME) $(PASSWORD)
+	docker exec -it $(CONTAINER_NAME_PREFIX)webjive-e2e-test python3 test/webjive_e2e_test.py $(USERNAME) $(PASSWORD)  | tee webjive-test-harness/report.txt
 	@$(MAKE) delete_dashboard DASHBOARD_NAME=PollingTestDashboard
 	@$(MAKE) down
 
