@@ -15,7 +15,7 @@
                         "properties": {
                             "polled_attr": [
                                 "randomattr",
-                                "300"
+                                "500"
                             ]
                         }
                     }

@@ -40,7 +40,8 @@ make test-cli
 # optional: run end-to-end tests against the integrated WebJive and TangoGQL system
 # results are written into report.txt in webjive-test-harness folder
 # Current tests include: pub/sub implementation
-make test-webjive USERNAME=user1 PASSWORD=abc123
+make ds-test-config
+make test-webjive WEBJIVE_USERNAME=user1 WEBJIVE_PASSWORD=abc123
 
 # stop all containers
 make down

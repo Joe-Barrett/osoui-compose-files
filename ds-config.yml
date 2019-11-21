@@ -45,3 +45,18 @@ services:
              json2tango -w -a -u /tmc-prototype/data/tmc-devices.json"
     volumes:
       - .:/tmc-prototype
+
+  test-ds-config:
+    image: ${DOCKER_REGISTRY_HOST}/ska-docker/tango-dsconfig:latest
+    network_mode: ${NETWORK_MODE}
+    container_name: ${CONTAINER_NAME_PREFIX}test-dsconfig
+    depends_on:
+      - databaseds
+    environment:
+      - TANGO_HOST=${TANGO_HOST}
+    init: true
+    command: >
+      sh -c "wait-for-it.sh ${TANGO_HOST} --timeout=30 --strict --
+             json2tango -w -a -u /test-data/test-device.json"
+    volumes:
+      - ./webjive-test-harness:/test-data

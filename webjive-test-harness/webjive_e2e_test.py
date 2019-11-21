@@ -12,11 +12,13 @@ class WebjiveE2ETest:
     polling_period = 0.5
 
     # What was the agreed naming when talking about the whole system (webjive+tangogql)? ***
-    def test_webjive_pubsub(self, username, password):
+    def test_webjive_pubsub(self, username, password, host):
+        """ Compare three values of a randomattr of webjivetestdevice with polling period 0.5
+        """
+
         print("\nRunning WebJive Suite Pub/Sub Test... \n")
         driver = self.create_driver()
 
-        host = "http://localhost:22484/testdb/devices"
         print("Loading page " + host + "... ", end=" ")
         driver.get(host)
         expected_title = "WebJive"
@@ -44,6 +46,7 @@ class WebjiveE2ETest:
 
         print("Checking attribute polling... ")
         try:
+            time.sleep(0.1)
             wait = WebDriverWait(driver, 1)
             randomattr1 = wait.until(ec.visibility_of_element_located((By.XPATH, "//div[@id='AttributeDisplay']"))).text
         except TimeoutException:
@@ -53,20 +56,15 @@ class WebjiveE2ETest:
         print(randomattr1)
 
         time.sleep(self.polling_period)
-
         randomattr2 = driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
         print(randomattr2)
 
         time.sleep(self.polling_period)
-
         randomattr3 = driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
         print(randomattr3)
 
-        attributes_match_error_msg = "FAILED. Expected all values to be different. Instead got values " + \
-                                     randomattr1 + ", " + randomattr2 + " and " + randomattr3 + "\n"
-
         if randomattr1 == randomattr2 or randomattr2 == randomattr3:
-            print(attributes_match_error_msg)
+            print("FAILED. Value does not change every " + str(self.polling_period) + " seconds.\n")
             return False
         print("SUCCESS\n")
         return True
@@ -83,9 +81,13 @@ class WebjiveE2ETest:
         driver.close()
 
     def login(self, driver, username, password):
+        """Logs the given user in through WebJive GUI using the given username and password.
+        Returns True for successful login and False if login fails
+        """
+
+        # wait until Log In button is visible
         wait = WebDriverWait(driver, 5)
         logged_in_as = wait.until(ec.presence_of_element_located((By.XPATH, "//div[@class='LogInOut']"))).text
-        #logged_in_as = driver.find_element_by_css_selector(".LogInOut").text
         if username in logged_in_as:
             return True
 
@@ -94,6 +96,7 @@ class WebjiveE2ETest:
         except NoSuchElementException:
             return False
 
+        # find and populate username and password fields
         username_field = driver.find_element_by_css_selector(".form-group:nth-child(1) > .form-control")
         username_field.send_keys(username)
         password_field = driver.find_element_by_css_selector(".form-group:nth-child(2) > .form-control")
@@ -118,11 +121,11 @@ class WebjiveE2ETest:
 
 if __name__ == "__main__":
     test_status = []
-    if len(sys.argv) != 3:
-        print("Username and password required as arguments")
+    if len(sys.argv) != 4:
+        print("Username, password and host address required as arguments")
         test_status.append(False)
     else:
-        test_status.append(WebjiveE2ETest().test_webjive_pubsub(sys.argv[1], sys.argv[2]))
+        test_status.append(WebjiveE2ETest().test_webjive_pubsub(sys.argv[1], sys.argv[2], sys.argv[3]))
     total = len(test_status)
     passed = sum(test_status)
     failed = total - passed
