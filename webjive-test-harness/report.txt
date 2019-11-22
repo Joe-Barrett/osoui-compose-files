@@ -1,0 +1,14 @@
+
+Running WebJive Suite Pub/Sub Test... 
+
+Loading page http://localhost:22484/testdb/devices...  SUCCESS
+Logging in...  SUCCESS
+Opening dashboard...  SUCCESS
+Checking attribute polling... 
+randomattr: 60.31
+randomattr: 67.19
+randomattr: 58.89
+SUCCESS
+
+Ran 1 tests.  1 passed and 0 failed.
+

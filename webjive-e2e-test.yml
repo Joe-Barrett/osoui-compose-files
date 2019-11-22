@@ -1,0 +1,14 @@
+version: "2.2"
+
+services:
+  webjive-e2e-test:
+    image: joyzoursky/python-chromedriver:3.7-selenium
+    network_mode: host
+    container_name: ${CONTAINER_NAME_PREFIX}webjive-e2e-test
+    ports:
+      - 2248:2248
+    stdin_open: true
+    tty: true
+    command: >
+      bash
+

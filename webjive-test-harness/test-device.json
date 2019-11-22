@@ -1,0 +1,26 @@
+{
+    "servers": {
+        "WebjiveTestDevice": {
+            "test": {
+                "WebjiveTestDevice": {
+                    "test/webjivetestdevice/1": {
+                        "attribute_properties": {
+                            "ranomattr": {
+                                "abs_change": [
+                                    "-1",
+                                    "1"
+                                ]
+                            }
+                        },
+                        "properties": {
+                            "polled_attr": [
+                                "randomattr",
+                                "500"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

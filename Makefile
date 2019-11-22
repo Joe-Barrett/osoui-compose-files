@@ -126,6 +126,12 @@ export_dashboards: webjive  ## export WebJive dashboards
 import_dashboards: webjive ## import WebJive dashboards
 	docker exec -i mongodb mongorestore --archive < data/mongo/dashboards.dump
 
+add_dashboard: webjive ## add a dashboard to WebJive (include path to dashboard dump in DASHBOARD_PATH variable)
+	docker exec -i mongodb mongorestore --archive < $(DASHBOARD_PATH)
+
+delete_dashboard: webjive ## delete a dashboard from WebJive (include dashboard name in DASHBOARD_NAME variable)
+	docker exec -i mongodb mongo dashboards --eval "db.dashboards.remove({'name': '$(DASHBOARD_NAME)'})"
+
 ds-config: minimal
 	$(DOCKER_COMPOSE_ARGS) docker-compose -f ds-config.yml -f tango.yml up -d
 	@echo Waiting for Tango DB to be populated
@@ -169,9 +175,32 @@ mvp: up ## start MVP devices
 		tm-alarmhandler
 
 test-cli: mvp ## test the OET command line interface via scripting
-	docker cp $(CURDIR)/test-harness oet:/app
-	docker exec -it oet /bin/bash -c /app/test-harness/run_test.sh | tee test-harness/report.txt
+	docker cp $(CURDIR)/test-harness $(CONTAINER_NAME_PREFIX)oet:/app
+	docker exec -it $(CONTAINER_NAME_PREFIX)oet /bin/bash -c /app/test-harness/run_test.sh | tee test-harness/report.txt
 	@$(MAKE) down
+
+ds-test-config: minimal
+	$(DOCKER_COMPOSE_ARGS) docker-compose -f ds-config.yml -f tango.yml up -d
+	@echo Waiting for Tango DB to be populated
+	@docker wait test-dsconfig > /dev/null
+	@$(MAKE) down
+
+test-webjive: check-user-and-password webjive ## run webjive end-to-end tests
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up -d webjivetestdevice
+	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) up -d webjive-e2e-test
+	docker cp $(CURDIR)/webjive-test-harness $(CONTAINER_NAME_PREFIX)webjive-e2e-test:/test
+	@$(MAKE) add_dashboard DASHBOARD_PATH=webjive-test-harness/PollingTestDashboard.dump
+	docker exec -it $(CONTAINER_NAME_PREFIX)webjive-e2e-test python3 test/webjive_e2e_test.py $(WEBJIVE_USERNAME) $(WEBJIVE_PASSWORD) "http://localhost:22484/testdb/devices"  | tee webjive-test-harness/report.txt
+	@$(MAKE) delete_dashboard DASHBOARD_NAME=PollingTestDashboard
+	@$(MAKE) down
+
+check-user-and-password:
+ifndef username
+	$(error WEBJIVE_USERNAME is not set. Usage: test-webjive WEBJIVE_USERNAME=username WEBJIVE_PASSWORD=password)
+endif
+ifndef password
+	$(error WEBJIVE_PASSWORD is not set. Usage: test-webjive WEBJIVE_USERNAME=username WEBJIVE_PASSWORD=password)
+endif
 
 stop:  ## stop a service (usage: make stop <servicename>)
 	$(DOCKER_COMPOSE_ARGS) docker-compose $(COMPOSE_FILE_ARGS) stop $(SERVICE)
