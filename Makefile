@@ -195,10 +195,10 @@ test-webjive: check-user-and-password webjive ## run webjive end-to-end tests
 	@$(MAKE) down
 
 check-user-and-password:
-ifndef username
+ifndef WEBJIVE_USERNAME
 	$(error WEBJIVE_USERNAME is not set. Usage: test-webjive WEBJIVE_USERNAME=username WEBJIVE_PASSWORD=password)
 endif
-ifndef password
+ifndef WEBJIVE_PASSWORD
 	$(error WEBJIVE_PASSWORD is not set. Usage: test-webjive WEBJIVE_USERNAME=username WEBJIVE_PASSWORD=password)
 endif
 
