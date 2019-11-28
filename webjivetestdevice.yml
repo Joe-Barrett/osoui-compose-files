@@ -2,7 +2,7 @@ version: "2.2"
 
 services:
   webjivetestdevice:
-    image: tango-example:webjive
+    image: nexus.engageska-portugal.pt/tango-example/tango-example:webjive
     network_mode: ${NETWORK_MODE}
     container_name: ${CONTAINER_NAME_PREFIX}webjivetestdevice
     environment:
