@@ -14,7 +14,9 @@ services:
       - redis
     volumes:
       - tangogql-logs:/var/log/tangogql
+      - ./ska-logging.yaml:/tangogql/ska-logging.yaml
     environment:
+      - LOG_CFG=ska-logging.yaml
       - TANGO_HOST=${TANGO_HOST}
       - LOG_PATH=/var/log/tangogql
       # If this is not set, the output of python is delayed and only shows when the docker container restarts
