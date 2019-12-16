@@ -25,6 +25,7 @@ WebJive General documentation is available in the following link: https://webjiv
    device
    architecture
    pubsub
+   tangogql
 
 
 Prerequsities
