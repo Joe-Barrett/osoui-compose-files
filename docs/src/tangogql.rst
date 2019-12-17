@@ -48,6 +48,12 @@ to configure the logging capabilites, this is an example of that file:
       level: DEBUG
       handlers: [console, info_file_handler, error_file_handler]
 
+To change the format of the logging, for example to the SKA standard one can simply  change this line:
+
+.. code-block:: console
+
+    format: "1|%(asctime)s.%(msecs)03dZ|%(levelname)s|%(threadName)s|%(funcName)s|%(filename)s#%(lineno)d|%(message)s"
+
 Optional: There is a way to pass a new file to tangoGQL using the *LOG_CFG* var, and example can be found on the *tangogql.yml* file
 
 .. code-block:: console
