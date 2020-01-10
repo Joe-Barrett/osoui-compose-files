@@ -5,7 +5,7 @@ volumes:
 
 services:
   tangogql:
-    image: nexus.engageska-portugal.pt/ska-docker/webjive-develop_tangogql:latest
+    image: web-maxiv-tangogql_tangoql:latest
     container_name: ${CONTAINER_NAME_PREFIX}tangogql
     network_mode: ${NETWORK_MODE}
     command: /bin/bash -c "source activate graphql && adev runserver tangogql/aioserver.py --app-factory=dev_run --port=5004"
@@ -14,7 +14,9 @@ services:
       - redis
     volumes:
       - tangogql-logs:/var/log/tangogql
+      - ./ska-logging.yaml:/tangogql/ska-logging.yaml
     environment:
+      - LOG_CFG=ska-logging.yaml
       - TANGO_HOST=${TANGO_HOST}
       - LOG_PATH=/var/log/tangogql
       # If this is not set, the output of python is delayed and only shows when the docker container restarts

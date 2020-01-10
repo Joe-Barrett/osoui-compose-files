@@ -26,6 +26,7 @@ WebJive General documentation is available in the following link: https://webjiv
    architecture
    webjive_suite_candc
    pubsub
+   tangogql
 
 
 Prerequsities
