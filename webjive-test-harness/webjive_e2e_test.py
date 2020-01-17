@@ -67,6 +67,74 @@ class WebjiveE2ETest:
             print("FAILED. Value does not change every " + str(self.polling_period) + " seconds.\n")
             return False
         print("SUCCESS\n")
+        self.close_driver(driver)
+        return True
+
+    def test_webjive_pubsub_double_attr(self, username, password, host):
+        """
+        """
+
+        print("\nRunning WebJive Suite Pub/Sub Double Attribute Test... \n")
+        driver = self.create_driver()
+
+        print("Loading page " + host + "... ", end=" ")
+        driver.get(host)
+        expected_title = "WebJive"
+        page_load_error_msg = "FAILED. The Webjive page was not loaded correctly. Page title should contain '" \
+                              + expected_title + "' but title is '" + driver.title + "'"
+        if expected_title not in driver.title:
+            print(page_load_error_msg)
+            return False
+        print("SUCCESS")
+
+        driver.find_element(By.LINK_TEXT, 'Dashboards').click()
+        print("Logging in... ", end=" ")
+        if not self.login(driver, username, password):
+            print("FAILED. Could not log in")
+            return False
+        print("SUCCESS")
+
+        print("Opening dashboard... ", end=" ")
+        if not self.open_dashboard(driver, "DoubleAttributeTestDashboard"):
+            print("FAILED. Could not open dashboard DoubleAttributeTestDashboard")
+            return False
+        print("SUCCESS")
+
+        driver.find_element_by_css_selector(".form-inline > button").click()
+        time.sleep(1)
+        driver.find_element_by_css_selector(".form-inline > button").click()
+        time.sleep(0.5)
+        driver.find_element_by_css_selector(".form-inline > button").click()
+        time.sleep(0.7)
+        driver.find_element_by_css_selector(".form-inline > button").click()
+        time.sleep(0.6)
+        driver.find_element_by_css_selector(".form-inline > button").click()
+
+        print("Checking attribute polling... ")
+        try:
+            time.sleep(0.5)
+            wait = WebDriverWait(driver, 1)
+            randomattr1 = wait.until(ec.visibility_of_element_located((By.XPATH, "//div[@id='AttributeDisplay']"))).text
+        except TimeoutException:
+            print("FAILED.  Could not find webjivetestdevice")
+            return False
+
+        print(randomattr1)
+
+        time.sleep(self.polling_period)
+        randomattr2 = driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
+        dishstate2 = driver.find_element_by_css_selector(".Widget:nth-child(2) > #AttributeDisplay").text
+        print(randomattr2 + " and " + dishstate2)
+
+        time.sleep(self.polling_period)
+        randomattr3 = driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
+        dishstate3 = driver.find_element_by_css_selector(".Widget:nth-child(2) > #AttributeDisplay").text
+        print(randomattr3 + " and " + dishstate3)
+
+        if randomattr1 == randomattr2 or randomattr2 == randomattr3:
+            print("FAILED. Value does not change every " + str(self.polling_period) + " seconds.\n")
+            return False
+        print("SUCCESS\n")
         return True
 
     def create_driver(self):
@@ -126,6 +194,7 @@ if __name__ == "__main__":
         test_status.append(False)
     else:
         test_status.append(WebjiveE2ETest().test_webjive_pubsub(sys.argv[1], sys.argv[2], sys.argv[3]))
+        test_status.append(WebjiveE2ETest().test_webjive_pubsub_double_attr(sys.argv[1], sys.argv[2], sys.argv[3]))
     total = len(test_status)
     passed = sum(test_status)
     failed = total - passed

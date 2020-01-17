@@ -5,10 +5,22 @@ Loading page http://localhost:22484/testdb/devices...  SUCCESS
 Logging in...  SUCCESS
 Opening dashboard...  SUCCESS
 Checking attribute polling... 
-randomattr: 60.31
-randomattr: 67.19
-randomattr: 58.89
+randomattr: 40.98
+randomattr: 51.66
+randomattr: 94.77
 SUCCESS
 
-Ran 1 tests.  1 passed and 0 failed.
+
+Running WebJive Suite Pub/Sub Double Attribute Test... 
+
+Loading page http://localhost:22484/testdb/devices...  SUCCESS
+Logging in...  SUCCESS
+Opening dashboard...  SUCCESS
+Checking attribute polling... 
+randomattr: 85.43
+randomattr: 85.43 and dishstate: 0.00
+randomattr: 85.43 and dishstate: 0.00
+FAILED. Value does not change every 0.5 seconds.
+
+Ran 2 tests.  1 passed and 1 failed.
 
