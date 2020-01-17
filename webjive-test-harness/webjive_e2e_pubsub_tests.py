@@ -3,7 +3,6 @@ import time
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
@@ -48,7 +47,7 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
 
         self.driver.find_element_by_css_selector(".form-inline > button").click()
 
-        print("Checking attribute... ")
+        print("Checking pub/sub with one attribute... ")
         try:
             time.sleep(0.5)
             wait = WebDriverWait(self.driver, 1)
@@ -89,7 +88,7 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
         time.sleep(0.6)
         self.driver.find_element_by_css_selector(".form-inline > button").click()
 
-        print("Checking attribute... ")
+        print("Checking pub/sub with two attributes... ")
         try:
             time.sleep(0.5)
             wait = WebDriverWait(self.driver, 1)
