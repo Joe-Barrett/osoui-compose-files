@@ -25,6 +25,7 @@ WebJive General documentation is available in the following link: https://webjiv
    device
    architecture
    webjive_suite_candc
+   webjive_suite_module_view
    pubsub
    tangogql
 
