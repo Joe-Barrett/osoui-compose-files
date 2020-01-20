@@ -18,11 +18,11 @@
    * This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server.
    ----->
 
-**A Module View Of Webjive Suite**
-==================================
+A Module View Of Webjive Suite
+==============================
 
-**Introduction**
-================
+Introduction
+------------
 
 ‘Webjive Suite’ is the name given to a collection of software that will
 be used to design and build simple engineering web-based user interfaces
@@ -42,18 +42,18 @@ other components (webjive dashboard,webjive auth and web-maxiv-tangogql)
 and their dependency relationships on other packages have been shown in
 the diagrams respectively.
 
-**Webjive Suite - Front End Module View Diagram**
-=================================================
+Webjive Suite - Front End Module View Diagram
+---------------------------------------------
 
 .. figure:: _static/img/webjive_suite_module_view_front_end.png
 
-**Webjive Suite - TangoGQL Module View Diagram**
-================================================
+Webjive Suite - TangoGQL Module View Diagram
+--------------------------------------------
 
 .. figure:: _static/img/webjive_suite_module_view_back_end.png
 
-**Webjive Suite Package Table**
-===============================
+Webjive Suite Package Table
+---------------------------
 
 .. raw:: html
 
