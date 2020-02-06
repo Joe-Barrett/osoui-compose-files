@@ -106,10 +106,7 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
         print(second_randomattr)
         print(second_randomattr2)
 
-        assert first_randomattr != second_randomattr, "FAILED. randomattr value does not change every " + str(self.polling_period) + \
-                                           " seconds with two attributes.\n"
-
-        assert first_randomattr2 != second_randomattr2, "FAILED. randomattr2 value does not change every " + str(self.polling_period) + \
+        assert (first_randomattr != second_randomattr) and (first_randomattr2 != second_randomattr2), "FAILED. Value(s) does not change every " + str(self.polling_period) + \
                                            " seconds with two attributes.\n"
 
     def create_driver(self):
