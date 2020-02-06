@@ -57,7 +57,6 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
             self.fail(msg=msg)
 
         print(randomattr1)
-
         time.sleep(self.polling_period)
         randomattr2 = self.driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
         print(randomattr2)
@@ -92,18 +91,25 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
         try:
             time.sleep(0.5)
             wait = WebDriverWait(self.driver, 1)
-            randomattr1 = wait.until(ec.visibility_of_element_located((By.XPATH, "//div[@id='AttributeDisplay']"))).text
+            first_randomattr = wait.until(ec.visibility_of_element_located((By.XPATH, "//div[@id='AttributeDisplay']"))).text
         except TimeoutException:
             msg = "FAILED.  Could not find webjivetestdevice"
             self.fail(msg=msg)
+        first_randomattr2 = self.driver.find_element_by_css_selector(".Widget:nth-child(2) > #AttributeDisplay").text
 
-        print(randomattr1)
-
+        print(first_randomattr)
+        print(first_randomattr2)
+        print("Sleep for " + str(self.polling_period*2) + " seconds")
         time.sleep(self.polling_period*2)
-        randomattr2 = self.driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
-        print(randomattr2)
+        second_randomattr = self.driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
+        second_randomattr2 = self.driver.find_element_by_css_selector(".Widget:nth-child(2) > #AttributeDisplay").text
+        print(second_randomattr)
+        print(second_randomattr2)
 
-        assert randomattr1 != randomattr2, "FAILED. Value does not change every " + str(self.polling_period) + \
+        assert first_randomattr != second_randomattr, "FAILED. randomattr value does not change every " + str(self.polling_period) + \
+                                           " seconds with two attributes.\n"
+
+        assert first_randomattr2 != second_randomattr2, "FAILED. randomattr2 value does not change every " + str(self.polling_period) + \
                                            " seconds with two attributes.\n"
 
     def create_driver(self):

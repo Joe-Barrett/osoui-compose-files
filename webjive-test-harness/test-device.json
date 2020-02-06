@@ -5,9 +5,13 @@
                 "WebjiveTestDevice": {
                     "test/webjivetestdevice/1": {
                         "attribute_properties": {
-                            "ranomattr": {
-                                "abs_change": [
-                                    "-1",
+                            "randomattr": {
+                                "rel_change": [
+                                    "1"
+                                ]
+                            },
+                            "randomattr2": {
+                                "rel_change": [
                                     "1"
                                 ]
                             }
@@ -15,6 +19,8 @@
                         "properties": {
                             "polled_attr": [
                                 "randomattr",
+                                "500",
+                                "randomattr2",
                                 "500"
                             ]
                         }
