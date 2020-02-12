@@ -28,7 +28,7 @@ WebJive General documentation is available in the following link: https://webjiv
    webjive_suite_module_view
    pubsub
    tangogql
-
+   features
 
 Prerequsities
 -------------
