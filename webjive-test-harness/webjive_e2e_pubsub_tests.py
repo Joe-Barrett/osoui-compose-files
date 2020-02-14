@@ -109,6 +109,36 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
         assert (first_randomattr != second_randomattr) and (first_randomattr2 != second_randomattr2), "FAILED. Value(s) does not change every " + str(self.polling_period) + \
                                            " seconds with two attributes.\n"
 
+    def test_webjive_pubsub_above_50hz(self):
+        polling_period = 0.01
+        attribute_value_list = []
+        print("Opening dashboard... ", end=" ")
+        if not self.open_dashboard(self.driver, "PubSubTestAbove50hz"):
+            msg = "FAILED. Could not open dashboard PubSubTestAbove50hz"
+            self.fail(msg=msg)
+        print("SUCCESS")
+        self.driver.find_element_by_css_selector(".form-inline > button").click()
+        print("Checking pub/sub with one attribute at frequency 100hz... ")
+        try:
+            time.sleep(polling_period*2)
+            wait = WebDriverWait(self.driver, 1)
+            randomattr = wait.until(ec.visibility_of_element_located((By.XPATH, "//div[@id='AttributeDisplay']"))).text
+            attribute_value_list.append(randomattr.split(":")[1]);
+        except TimeoutException:
+            msg = "FAILED.  Could not find webjivetestdevice"
+            self.fail(msg=msg)
+        print(randomattr)
+        for i in range(15):
+            print("Sleep for " + str(polling_period) + " seconds")
+            time.sleep(polling_period)
+            randomattr1 = self.driver.find_element_by_css_selector(".Widget:nth-child(1) > #AttributeDisplay").text
+            print(randomattr1)
+            attribute_value_list.append(randomattr1.split(":")[1]);
+
+        msg = "FAILED. Value does not change every " + str(polling_period) + " seconds with one attribute.\n"
+        assert (len(attribute_value_list) == len(set(attribute_value_list))),msg
+
+
     def create_driver(self):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--no-sandbox')
