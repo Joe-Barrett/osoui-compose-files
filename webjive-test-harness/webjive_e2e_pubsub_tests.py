@@ -37,8 +37,10 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
-    # What was the agreed naming when talking about the whole system (webjive+tangogql)? ***
     def test_webjive_pubsub(self):
+        """
+        Test Webjive Suite pub/sub functionality works for one attribute subscribed to change event
+        """
         print("Opening dashboard... ", end=" ")
         if not self.open_dashboard(self.driver, "PollingTestDashboard"):
             msg = "FAILED. Could not open dashboard PollingTestDashboard"
@@ -70,6 +72,8 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
 
     def test_webjive_pubsub_double_attr(self):
         """
+        Check Webjive Suite pub/sub functionality works when there are more than one attribute subscribed
+        to the change event on the dashboard.
         """
         print("Opening dashboard... ", end=" ")
         if not self.open_dashboard(self.driver, "DoubleAttributeTestDashboard"):
