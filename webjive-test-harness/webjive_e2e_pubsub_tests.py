@@ -110,17 +110,25 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
                                            " seconds with two attributes.\n"
 
     def test_webjive_pubsub_above_50hz(self):
+        """
+        Function to test the Pub-sub feature at frequency higher than 50hz with single attribute.
+        Currently, it is checking unique attribute value at every 10ms(100hz frequency).
+        """
         polling_period = 0.01
         attribute_value_list = []
+
         print("Opening dashboard... ", end=" ")
         if not self.open_dashboard(self.driver, "PubSubTestAbove50hz"):
             msg = "FAILED. Could not open dashboard PubSubTestAbove50hz"
             self.fail(msg=msg)
         print("SUCCESS")
+
+        # find and click start button on dashboard
         self.driver.find_element_by_css_selector(".form-inline > button").click()
         print("Checking pub/sub with one attribute at frequency 100hz... ")
         try:
             time.sleep(polling_period*2)
+            # wait until attribute value is visible
             wait = WebDriverWait(self.driver, 1)
             randomattr = wait.until(ec.visibility_of_element_located((By.XPATH, "//div[@id='AttributeDisplay']"))).text
             attribute_value_list.append(randomattr.split(":")[1]);
@@ -128,6 +136,7 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
             msg = "FAILED.  Could not find webjivetestdevice"
             self.fail(msg=msg)
         print(randomattr)
+
         for i in range(15):
             print("Sleep for " + str(polling_period) + " seconds")
             time.sleep(polling_period)
