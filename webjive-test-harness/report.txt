@@ -4,23 +4,71 @@ Running WebJive Suite Pub/Sub Test...
 Loading page http://localhost:22484/testdb/devices...  SUCCESS
 Logging in...  SUCCESS
 Opening dashboard...  SUCCESS
-Checking attribute polling... 
-randomattr: 40.98
-randomattr: 51.66
-randomattr: 94.77
-SUCCESS
-
-
-Running WebJive Suite Pub/Sub Double Attribute Test... 
+Checking pub/sub with one attribute... 
+randomattr: 84.97
+randomattr: 88.57
+randomattr: 44.03
+.
+Running WebJive Suite Pub/Sub Test... 
 
 Loading page http://localhost:22484/testdb/devices...  SUCCESS
 Logging in...  SUCCESS
 Opening dashboard...  SUCCESS
-Checking attribute polling... 
-randomattr: 85.43
-randomattr: 85.43 and dishstate: 0.00
-randomattr: 85.43 and dishstate: 0.00
-FAILED. Value does not change every 0.5 seconds.
+Checking pub/sub with one attribute at frequency 100hz... 
+test/webjivetestdevice/1/randomattr3: 84.90
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 49.48
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 53.20
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 73.09
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 99.29
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 5.44
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 21.08
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 29.22
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 15.30
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 55.61
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 70.75
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 13.44
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 75.99
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 77.97
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 40.99
+Sleep for 0.01 seconds
+test/webjivetestdevice/1/randomattr3: 39.19
+.
+Running WebJive Suite Pub/Sub Test... 
 
-Ran 2 tests.  1 passed and 1 failed.
+Loading page http://localhost:22484/testdb/devices...  SUCCESS
+Logging in...  SUCCESS
+Opening dashboard...  SUCCESS
+Checking pub/sub with two attributes... 
+randomattr: 92.70
+randomattr2: 2.25
+Sleep for 1.0 seconds
+randomattr: 92.70
+randomattr2: 2.25
+F
+======================================================================
+FAIL: test_webjive_pubsub_double_attr (__main__.WebjiveE2EPubSubTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test/webjive_e2e_pubsub_tests.py", line 110, in test_webjive_pubsub_double_attr
+    " seconds with two attributes.\n"
+AssertionError: FAILED. Value(s) does not change every 0.5 seconds with two attributes.
 
+
+----------------------------------------------------------------------
+Ran 3 tests in 21.901s
+
+FAILED (failures=1)

@@ -191,9 +191,11 @@ test-webjive: check-user-and-password webjive ## run webjive end-to-end tests
 	docker cp $(CURDIR)/webjive-test-harness $(CONTAINER_NAME_PREFIX)webjive-e2e-test:/test
 	@$(MAKE) add_dashboard DASHBOARD_PATH=webjive-test-harness/PollingTestDashboard.dump
 	@$(MAKE) add_dashboard DASHBOARD_PATH=webjive-test-harness/DoubleAttributeTestDashboard.dump
+	@$(MAKE) add_dashboard DASHBOARD_PATH=webjive-test-harness/PubSubTestAbove50hz.dump
 	docker exec -it $(CONTAINER_NAME_PREFIX)webjive-e2e-test python3 test/webjive_e2e_pubsub_tests.py $(WEBJIVE_USERNAME) $(WEBJIVE_PASSWORD) "http://localhost:22484/testdb/devices"  | tee webjive-test-harness/report.txt
 	@$(MAKE) delete_dashboard DASHBOARD_NAME=PollingTestDashboard
 	@$(MAKE) delete_dashboard DASHBOARD_NAME=DoubleAttributeTestDashboard
+	@$(MAKE) delete_dashboard DASHBOARD_NAME=PubSubTestAbove50hz
 	@$(MAKE) down
 
 check-user-and-password:
