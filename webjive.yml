@@ -17,7 +17,7 @@ services:
       - "traefik.port=80"
 
   auth:
-    image: nexus.engageska-portugal.pt/ska-docker/webjive-develop_auth:latest
+    image: nexus.engageska-portugal.pt/ska-telescope/webjive-auth:latest
     container_name: ${CONTAINER_NAME_PREFIX}auth
     network_mode: ${NETWORK_MODE}
     environment:
