@@ -30,6 +30,7 @@ WebJive General documentation is available in the following link: https://webjiv
    tangogql
    features
    case_sensitive
+   webjive_users
 
 Prerequsities
 -------------
