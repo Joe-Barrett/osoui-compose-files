@@ -27,7 +27,7 @@ services:
       - "traefik.port=8080"
 
   dashboards:
-    image: nexus.engageska-portugal.pt/ska-docker/webjive-develop_dashboards:latest
+    image: nexus.engageska-portugal.pt/ska-telescope/dashboard-repo:latest
     container_name: ${CONTAINER_NAME_PREFIX}dashboards
     network_mode: ${NETWORK_MODE}
     depends_on:
