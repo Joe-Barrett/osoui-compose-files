@@ -5,7 +5,7 @@ volumes:
 
 services:
   tangogql:
-    image: nexus.engageska-portugal.pt/ska-telescope/web-maxiv-tangogql:latest
+    image: nexus.engageska-portugal.pt/ska-telescope/web-maxiv-tangogql:1.0.0-develop-1
     container_name: ${CONTAINER_NAME_PREFIX}tangogql
     network_mode: ${NETWORK_MODE}
     command: /bin/bash -c "adev runserver tangogql/aioserver.py --app-factory=dev_run --port=5004"
