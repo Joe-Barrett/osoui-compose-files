@@ -9,7 +9,11 @@ is fast and makes efficient use of the network.
 
 On similar concept , Webjive subscribes to TangoGQL devices which then polls the states of devices every 3 seconds. When subscription to an attribute is made, the Webjive suite establishes the type of polling mechanism that attribute uses.  With this knowledge the Webjive suite determines and selects the most appropriate way to interact with Tango. If Tango events are set up for that attribute, they will be used. However if they aren't the Webjive suite reverts back to using the original mechanism of TangoGQL polling the attribute then publishing updates to the webjive user interface when it changes.
 
+.\ |IMG0|\
 
+.. |IMG0| image:: _static/img/pub-sub-model-img.png
+   :height: 312 px
+   :width: 771 px
 
 Enable/disable publish-subscribe feature from TangoGQL
 =======================================================
@@ -34,10 +38,10 @@ if it fails it tries PeriodicEvents, and if that fails it falls back to
 polling
 
 
+Setting up publish-subscribe on webjive suite
+=============================================
 Getting Started
-===============
-Webjive Suite set up
---------------------
+---------------
 
 This page shows how to set up the Webjive suite publish-subscribe (pub/sub) mechanism using the ‘tangotest’ and ‘webjivetestdevice’ tango device servers. When setting up pub/sub for your own tango devices, you should substitute the aforementioned tango devices with your own.
 
