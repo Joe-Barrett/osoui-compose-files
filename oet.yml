@@ -18,8 +18,8 @@ version: '2.2'
 
 services:
   oet-ssh:
-    image: nexus.engageska-portugal.pt/ska-telescope/oet-ssh:latest
-    container_name: ${CONTAINER_NAME_PREFIX}oet-ssh
+    image: nexus.engageska-portugal.pt/ska-telescope/observation-execution-tool-ssh:latest
+    container_name: ${CONTAINER_NAME_PREFIX}observation-execution-tool-ssh
     network_mode: ${NETWORK_MODE}
     environment:
       - TANGO_HOST=${TANGO_HOST}
@@ -27,8 +27,8 @@ services:
     ports:
       - '2022:22'
   oet:
-    image: nexus.engageska-portugal.pt/ska-telescope/oet:latest
-    container_name: ${CONTAINER_NAME_PREFIX}oet
+    image: nexus.engageska-portugal.pt/ska-telescope/observation-execution-tool:latest
+    container_name: ${CONTAINER_NAME_PREFIX}observation-execution-tool
     network_mode: ${NETWORK_MODE}
     environment:
       - TANGO_HOST=${TANGO_HOST}
