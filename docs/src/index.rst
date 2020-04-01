@@ -77,6 +77,8 @@ Webjive Dashboard
    contribution
    device
    pubsub
+   tangogql_logging
+   webjive_users
 
 .. toctree::
    :caption: External resources:
