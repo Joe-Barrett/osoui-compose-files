@@ -66,6 +66,7 @@ Webjive Dashboard
    overview
    how_run
    quick_start
+   webjive_users
 
 
 .. toctree::
@@ -78,7 +79,6 @@ Webjive Dashboard
    device
    pubsub
    tangogql_logging
-   webjive_users
 
 .. toctree::
    :caption: External resources:
