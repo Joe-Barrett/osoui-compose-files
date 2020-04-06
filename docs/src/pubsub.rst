@@ -3,15 +3,18 @@ Webjive Suite Publish-Subscribe Mechanism
 Introduction
 ============
 
-The publish-subscribe communication paradigm is a more efficient and natural way of programming. In this paradigm the client registers his interest once in an event (value). An event can be a change in value,
-a regular update at a fixed frequency or an archive event. After that the server informs the client every time an event has occurred. This paradigm avoids the client polling, frees it for doing other things,
-is fast and makes efficient use of the network.
+Publish/Subscribe is a software design pattern that describes the flow of messages between applications, devices, or services in terms of a publisher-to-subscriber relationship.
 
-On similar concept , Webjive subscribes to TangoGQL devices which then polls the states of devices every 3 seconds. When subscription to an attribute is made, the Webjive suite establishes the type of polling mechanism that attribute uses.  With this knowledge the Webjive suite determines and selects the most appropriate way to interact with Tango. If Tango events are set up for that attribute, they will be used. However if they aren't the Webjive suite reverts back to using the original mechanism of TangoGQL polling the attribute then publishing updates to the webjive user interface when it changes.
+publish/subscribe mechanism works like this: a publisher (i.e. any source of data) pushes messages out to interested subscribers (i.e. receivers of data) via channels . All subscribers to a specific publisher channel are immediately notified when new messages have been published on that channel, and the message data (or payload) is received together with the notification.
+
+In the Webjive suite, TangoGQL works as publisher and Webjive User Interface  works as subscriber.
+
+When subscription to an attribute is made, the Webjive suite establishes the type of polling mechanism that attribute uses. With this knowledge the Webjive suite determines and selects the most appropriate way to interact with Tango. If Tango events are set up for that attribute, they will be used. However if they aren't the Webjive suite reverts back to using the original mechanism of TangoGQL polling the attribute then publishing updates to the Webjive user interface when it changes.
+
 
 .\ |IMG0|\
 
-.. |IMG0| image:: _static/img/pub-sub-model-img.png
+.. |IMG0| image:: _static/img/pub-sub-model-webjive.png
    :height: 312 px
    :width: 771 px
 
@@ -38,7 +41,7 @@ if it fails it tries PeriodicEvents, and if that fails it falls back to
 polling
 
 
-Setting up publish-subscribe on webjive suite
+Setting up publish-subscribe on Webjive suite
 =============================================
 Getting Started
 ---------------
@@ -47,8 +50,9 @@ This page shows how to set up the Webjive suite publish-subscribe (pub/sub) mech
 
 To follow this guide you will need to have an instance of Webjive suite and Tango Jive running locally. The easiest way of doing this is to use the images available through the Gitlab repository ska-engineering-ui-compose-utils.
 
-Using a terminal, go to the ska-engneering-ui-compose-utils. Using the following make commands start the mvp, tango test and webjive test device images. Webjive suite will be launched as part of this.
+Using a terminal, go to the ska-engneering-ui-compose-utils. Using the following make commands create tango DB and register all devices,  start the mvp, tango test and webjive test device images. Webjive suite will be launched as part of this.
 
+* make ds-config
 * make mvp
 * make start tangotest
 * make  start webjivetestdevice
