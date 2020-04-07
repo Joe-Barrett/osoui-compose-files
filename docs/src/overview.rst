@@ -29,23 +29,9 @@ The right hand side of the web interface, as highlighted in figure 2, presents t
 
 **Figure 2. Screenshot to show Webjive screen when user goes to ‘localhost:22484 /testdb/dashboard’ in web browser. The available widgets are located on the right of the screen.**
 
-Webjive widgets, like react widgets, are components which allow the user to obtain, view and handle their data in a straightforward and repeatable manner. Webjive currently has the following widgets:
+Webjive widgets, like react widgets, are components which allow the user to obtain, view and handle their data in a straightforward and repeatable manner. 
 
-* Label
-
-* Attribute Display
-
-* Attribute Writer
-
-* Attribute Plot
-
-* Attribute Scatter
-
-* Spectrum
-
-* Command Executor
-
-* Attribute Dial
+Webjive widget are listed in the Webjive Official Documentation: https://webjive.readthedocs.io/en/latest/index.html
 
 
 TangoGQL

@@ -46,11 +46,7 @@ The web browser should present a screen similar to that shown in figure 2.
 
 **Figure 4. Screenshot to show what the user should see when Webjive is running but no user logged in.**
 
-Currently SKA Webjive uses the generic username and password credentials:
-
-		Username: user1
-
-		Password: abc123
+Currently SKA Webjive uses username and password reported in the :doc:`Webjive User Document <webjive_users>`
 
 .\ |IMG4|\ 
 
