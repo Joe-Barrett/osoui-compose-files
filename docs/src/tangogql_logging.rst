@@ -1,52 +1,10 @@
-TangoGQL Logging
-================
+TangoGQL Logging in SKA
+=======================
 
 TangoGQL logging system uses a file called `logging.yaml` by default 
-to configure the logging capabilites, this is an example of that file: 
+to configure the logging capabilites.
 
-.. code-block:: console
-
-   ----
-    version: 1
-    disable_existing_loggers: False
-    formatters:
-      simple:
-        format: "%(asctime)s - %(levelname)s - %(message)s"
-    
-    handlers:
-      console:
-        class: logging.StreamHandler
-        level: DEBUG
-        formatter: simple
-        stream: ext://sys.stdout
-    
-      info_file_handler:
-        class: logging.handlers.RotatingFileHandler
-        level: INFO
-        formatter: simple
-        filename: /var/log/tangogql/info.log
-        maxBytes: 10485760 # 10MB
-        backupCount: 20
-        encoding: utf8
-    
-      error_file_handler:
-        class: logging.handlers.RotatingFileHandler
-        level: ERROR
-        formatter: simple
-        filename: /var/log/tangogql/errors.log
-        maxBytes: 10485760 # 10MB
-        backupCount: 20
-        encoding: utf8
-    
-    loggers:
-      my_module:
-        level: ERROR
-        handlers: [console]
-        propagate: no
-    
-    root:
-      level: DEBUG
-      handlers: [console, info_file_handler, error_file_handler]
+Please refer to the TangoGQL Official Documentation for the logging details: https://web-maxiv-tangogql.readthedocs.io/en/latest/logging.html
 
 To change the format of the logging, for example to the SKA standard one can simply  change this line:
 
