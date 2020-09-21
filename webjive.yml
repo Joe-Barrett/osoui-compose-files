@@ -5,7 +5,7 @@ volumes:
 
 services:
   webjive:
-    image: nexus.engageska-portugal.pt/ska-telescope/webjive:1.0.0-develop-38
+    image: nexus.engageska-portugal.pt/ska-telescope/webjive:1.0.2-develop-126
     container_name: ${CONTAINER_NAME_PREFIX}webjive
     network_mode: ${NETWORK_MODE}
     depends_on:
@@ -17,7 +17,7 @@ services:
       - "traefik.port=80"
 
   auth:
-    image: nexus.engageska-portugal.pt/ska-telescope/webjive-auth:1.0.0-develop-14
+    image: nexus.engageska-portugal.pt/ska-telescope/webjive-auth:1.0.0-develop-15
     container_name: ${CONTAINER_NAME_PREFIX}auth
     network_mode: ${NETWORK_MODE}
     environment:
@@ -27,7 +27,7 @@ services:
       - "traefik.port=8080"
 
   dashboards:
-    image: nexus.engageska-portugal.pt/ska-telescope/dashboard-repo:1.0.0-develop-2
+    image: nexus.engageska-portugal.pt/ska-telescope/dashboard-repo:1.0.0-develop-11
     container_name: ${CONTAINER_NAME_PREFIX}dashboards
     network_mode: ${NETWORK_MODE}
     depends_on:

@@ -24,6 +24,8 @@ The following Users are set on Webjive:
 +-----------------+------------------------------------------------+
 | MCCS            | MCCS_SKA                                       |
 +-----------------+------------------------------------------------+
+| VIOLA           | VIOLA_SKA                                      |
++-----------------+------------------------------------------------+
 
 If your team is not above and you need a new user please drop a message
 in our #team-oso_ui channel
