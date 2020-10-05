@@ -37,6 +37,12 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
+    def test_webjive_dashboard_home(self):
+        print('Testing test_webjive_dashboard_home')
+        element = self.driver.find_element_by_css_selector('.dashboard-menu > .dashboard-menu-button')
+
+        assert (True == element.get_property('disabled'))
+
     def test_webjive_pubsub(self):
         """
         Test Webjive Suite pub/sub functionality works for one attribute subscribed to change event
@@ -150,7 +156,6 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
 
         msg = "FAILED. Value does not change every " + str(polling_period) + " seconds with one attribute.\n"
         assert (len(attribute_value_list) == len(set(attribute_value_list))),msg
-
 
     def create_driver(self):
         chrome_options = webdriver.ChromeOptions()
