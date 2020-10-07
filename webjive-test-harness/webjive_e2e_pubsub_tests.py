@@ -43,6 +43,17 @@ class WebjiveE2EPubSubTest(unittest.TestCase):
 
         assert (True == element.get_property('disabled'))
 
+    def test_webjive_click_dashboard(self):
+        print('Testing test_webjive_click_dashbaord')
+
+        self.driver.find_element(By.LINK_TEXT, 'Dashboards').click()
+
+        element = self.driver.find_element_by_css_selector('.dashboard-menu > .dashboard-menu-button')
+
+        assert (True == element.get_property('enabled'))
+
+
+
     def test_webjive_pubsub(self):
         """
         Test Webjive Suite pub/sub functionality works for one attribute subscribed to change event
